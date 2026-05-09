@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GitFork } from "lucide-react";
 
 const projects = [
   {
@@ -48,7 +48,7 @@ export default function Projects() {
               <h3 className="font-semibold text-lg text-slate-100">{project.title}</h3>
               <div className="flex gap-2">
                 <a href={project.github} className="text-slate-400 hover:text-white transition-colors" aria-label="Código fuente">
-                  <Github className="w-5 h-5" />
+                  <GitFork className="w-5 h-5" />
                 </a>
                 <a href={project.live} className="text-slate-400 hover:text-white transition-colors" aria-label="Demo en vivo">
                   <ExternalLink className="w-5 h-5" />
