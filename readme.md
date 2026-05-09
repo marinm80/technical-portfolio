@@ -205,22 +205,22 @@ Para mantener un historial limpio y profesional, el repositorio sigue metodolog�
 Para garantizar un desarrollo ordenado y una arquitectura sólida, el proyecto se divide en los siguientes hitos y tareas. El diseño base es un **Layout con Menú Lateral (Sidebar)**, inspirado en herramientas de desarrollo profesional (estilos IDE/Documentación), priorizando rutas reales y directas al grano, descartando el formato de "landing page de un solo scroll".
 
 ### Fase 1: Arquitectura Base y UI/UX Core
-- [ ] **Tarea 1.1: Configuración de Layout Principal.** Crear el componente `Sidebar` persistente (menú lateral responsivo) y el contenedor principal para las vistas (`MainLayout`).
-- [ ] **Tarea 1.2: Definición de Tema y Tipografía.** Configurar en Tailwind el tema oscuro corporativo (tonos grafito/obsidiana), el color de acento único, tipografía Sans-serif (ej. Inter) para lectura y Monospaced (ej. Fira Code) para etiquetas técnicas.
-- [ ] **Tarea 1.3: Sistema de Enrutamiento.** Configurar React Router (o sistema del framework) para las rutas principales: `/`, `/experience`, `/projects`, `/blog`.
+- [x] **Tarea 1.1: Configuración de Layout Principal.** Crear el componente `Sidebar` persistente (menú lateral responsivo) y el contenedor principal para las vistas (`MainLayout`).
+- [x] **Tarea 1.2: Definición de Tema y Tipografía.** Configurar en Tailwind el tema oscuro corporativo (tonos grafito/obsidiana), el color de acento único, tipografía Sans-serif (ej. Inter) para lectura y Monospaced (ej. Fira Code) para etiquetas técnicas.
+- [x] **Tarea 1.3: Sistema de Enrutamiento.** Configurar React Router (o sistema del framework) para las rutas principales: `/`, `/experience`, `/projects`, `/blog`.
 
 ### Fase 2: Desarrollo de Vistas Principales (Directo al Grano)
-- [ ] **Tarea 2.1: Vista Inicio (`/`).** Crear el titular impactante ("Gancho"), resumen ejecutivo corto y acceso rápido a "Experiencia" y "CV".
-- [ ] **Tarea 2.2: Vista Experiencia (`/experience`).** Maquetar tarjetas de experiencia laboral priorizando el impacto técnico y arquitectura (viñetas de logros).
-- [ ] **Tarea 2.3: Vista Proyectos (`/projects`).** Construir el grid de proyectos con enfoque en los desafíos resueltos, stack utilizado y enlaces a repositorios.
+- [x] **Tarea 2.1: Vista Inicio (`/`).** Crear el titular impactante ("Gancho"), resumen ejecutivo corto y acceso rápido a "Experiencia" y "CV".
+- [x] **Tarea 2.2: Vista Experiencia (`/experience`).** Maquetar tarjetas de experiencia laboral priorizando el impacto técnico y arquitectura (viñetas de logros).
+- [x] **Tarea 2.3: Vista Proyectos (`/projects`).** Construir el grid de proyectos con enfoque en los desafíos resueltos, stack utilizado y enlaces a repositorios.
 
 ### Fase 3: Funcionalidades Dinámicas y Pulido
-- [ ] **Tarea 3.1: Micro-interacciones (Framer Motion).** Añadir transiciones de página fluidas (fade-in sutil) y efectos de *hover* técnicos que refuercen la experiencia premium.
+- [x] **Tarea 3.1: Micro-interacciones (Framer Motion).** Añadir transiciones de página fluidas (fade-in sutil) y efectos de *hover* técnicos que refuercen la experiencia premium.
 - [ ] **Tarea 3.2: Motor del Blog Técnico (MDX).** Asegurar la correcta renderización de artículos locales `.mdx` en la ruta `/blog` con resaltado de sintaxis en el código.
-- [ ] **Tarea 3.3: Internacionalización (i18n).** Implementar la lógica para el cambio instantáneo entre Español e Inglés gestionado desde el Sidebar.
-- [ ] **Tarea 3.4: Formulario de Contacto.** Integrar y validar el componente de contacto *Serviceless* con EmailJS, React Hook Form y Zod.
+- [x] **Tarea 3.3: Internacionalización (i18n).** Implementar la lógica para el cambio instantáneo entre Español e Inglés gestionado desde el Sidebar.
+- [x] **Tarea 3.4: Formulario de Contacto.** Integrar y validar el componente de contacto *Serviceless* con EmailJS, React Hook Form y Zod.
 
 ### Fase 4: Optimización, Pruebas y Despliegue
-- [ ] **Tarea 4.1: Auditoría Lighthouse y SEO.** Asegurar puntuaciones perfectas en rendimiento y accesibilidad, además de configurar metadatos dinámicos.
-- [ ] **Tarea 4.2: CI/CD y Testing Base.** Configurar pipelines de GitHub Actions (Lint + Types) y sentar las bases para pruebas unitarias.
+- [x] **Tarea 4.1: Auditoría Lighthouse y SEO.** Asegurar puntuaciones perfectas en rendimiento y accesibilidad, además de configurar metadatos dinámicos.
+- [x] **Tarea 4.2: CI/CD y Testing Base.** Configurar pipelines de GitHub Actions (Lint + Types) y sentar las bases para pruebas unitarias.
 - [ ] **Tarea 4.3: Despliegue a Producción.** Despliegue del portafolio en Vercel, Netlify o Render y pruebas finales en vivo.
