@@ -1,18 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { User, Briefcase, Code, FileText, Mail, X } from "lucide-react";
+import { User, Briefcase, Code, FileText, Mail, X, Globe } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useTranslation } from "react-i18next";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-const navItems = [
-  { path: "/", label: "Overview", icon: User },
-  { path: "/experience", label: "Experience", icon: Briefcase },
-  { path: "/projects", label: "Projects", icon: Code },
-  { path: "/blog", label: "Writing", icon: FileText },
-];
 
 interface SidebarProps {
   isOpen: boolean;
@@ -20,6 +14,20 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'es' ? 'en' : 'es';
+    i18n.changeLanguage(newLang);
+  };
+
+  const navItems = [
+    { path: "/", label: t('nav.overview'), icon: User },
+    { path: "/experience", label: t('nav.experience'), icon: Briefcase },
+    { path: "/projects", label: t('nav.projects'), icon: Code },
+    { path: "/blog", label: t('nav.blog'), icon: FileText },
+  ];
+
   return (
     <>
       {/* Mobile Backdrop */}
@@ -53,7 +61,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <NavLink
               key={item.path}
               to={item.path}
-              onClick={onClose} // Auto-close on mobile when navigating
+              onClick={onClose}
               className={({ isActive }) =>
                 cn(
                   "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
@@ -72,14 +80,28 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-obsidian-border">
-          <a
-            href="mailto:hello@example.com"
-            className="flex items-center gap-3 px-4 py-2 text-sm text-slate-400 hover:text-slate-200 transition-colors group"
+        <div className="p-4 border-t border-obsidian-border flex flex-col gap-2">
+          <NavLink
+            to="/contact"
+            onClick={onClose}
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-3 px-4 py-2 text-sm transition-colors group rounded-md",
+                isActive ? "text-accent" : "text-slate-400 hover:text-slate-200"
+              )
+            }
           >
             <Mail className="w-4 h-4 group-hover:text-accent transition-colors" />
-            Contact
-          </a>
+            {t('nav.contact')}
+          </NavLink>
+          
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-3 px-4 py-2 text-sm text-slate-400 hover:text-slate-200 transition-colors group rounded-md text-left"
+          >
+            <Globe className="w-4 h-4 group-hover:text-accent transition-colors" />
+            {i18n.language === 'es' ? 'English' : 'Español'}
+          </button>
         </div>
       </aside>
     </>
