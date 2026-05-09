@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { User, Briefcase, Code, FileText, Mail, X, Globe, Link as LinkIcon, GitBranch } from "lucide-react";
+import { User, Briefcase, Code, FileText, Mail, X, Globe } from "lucide-react";
+import { GithubIcon } from "./icons/GithubIcon";
+import { LinkedinIcon } from "./icons/LinkedinIcon";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useTranslation } from "react-i18next";
@@ -83,10 +85,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="p-4 border-t border-obsidian-border flex flex-col gap-2">
           <div className="flex gap-4 px-4 py-2 mb-2">
             <a href="https://github.com/tu-usuario" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-accent transition-colors" title="GitHub">
-              <GitBranch className="w-5 h-5" />
+              <GithubIcon className="w-5 h-5" />
             </a>
             <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-accent transition-colors" title="LinkedIn">
-              <LinkIcon className="w-5 h-5" />
+              <LinkedinIcon className="w-5 h-5" />
             </a>
           </div>
 
