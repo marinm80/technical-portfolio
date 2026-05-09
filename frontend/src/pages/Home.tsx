@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Linkedin } from "lucide-react";
+import { ArrowRight, Link as LinkIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -36,7 +36,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-slate-300 hover:text-accent transition-colors"
           >
-            <Linkedin className="w-4 h-4" />
+            <LinkIcon className="w-4 h-4" />
             {t('home.linkedin')}
           </a>
         </div>
