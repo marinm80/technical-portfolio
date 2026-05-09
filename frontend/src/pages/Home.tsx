@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -31,12 +31,13 @@ export default function Home() {
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="/cv.pdf"
+            href="https://linkedin.com/in/tu-perfil"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-slate-300 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-slate-300 hover:text-accent transition-colors"
           >
-            {t('home.dlCV')}
+            <Linkedin className="w-4 h-4" />
+            {t('home.linkedin')}
           </a>
         </div>
       </section>

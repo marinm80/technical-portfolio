@@ -13,7 +13,7 @@ const resources = {
       "home.subtitle": "specialized in React & Node.js",
       "home.bio": "I transform complex problems into scalable and efficient systems. Focused on code quality, clean architectures, and exceptional user experiences.",
       "home.viewExp": "View Experience",
-      "home.dlCV": "Download CV",
+      "home.linkedin": "LinkedIn",
       "home.stack": "Main Stack"
     }
   },
@@ -28,7 +28,7 @@ const resources = {
       "home.subtitle": "especializado en React y Node.js",
       "home.bio": "Transformo problemas complejos en sistemas escalables y eficientes. Enfocado en la calidad del código, arquitecturas limpias y experiencias de usuario excepcionales.",
       "home.viewExp": "Ver Experiencia",
-      "home.dlCV": "Descargar CV",
+      "home.linkedin": "LinkedIn",
       "home.stack": "Stack Principal"
     }
   }
