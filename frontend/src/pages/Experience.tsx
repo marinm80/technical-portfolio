@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const experiences = [
   {
@@ -9,7 +11,9 @@ const experiences = [
     description: [
       "Lideré la migración de una arquitectura monolítica a micro-frontends reduciendo el tiempo de build en un 40%.",
       "Implementé un sistema de diseño utilizando React y Tailwind CSS, estandarizando componentes para 5 equipos.",
-      "Optimicé el Core Web Vitals alcanzando un score de 95+ en Lighthouse a través de lazy loading avanzado y SSR."
+      "Optimicé el Core Web Vitals alcanzando un score de 95+ en Lighthouse a través de lazy loading avanzado y SSR.",
+      "Mentoricé a nuevos ingenieros durante su proceso de onboarding, reduciendo el tiempo de rampa en un 30%.",
+      "Establecí pautas estrictas de revisión de código garantizando la mantenibilidad a largo plazo."
     ]
   },
   {
@@ -20,10 +24,66 @@ const experiences = [
     description: [
       "Desarrollé APIs RESTful en Node.js y Express gestionando más de 1M de peticiones diarias.",
       "Diseñé esquemas de bases de datos relacionales en PostgreSQL para sistemas de facturación complejos.",
-      "Mentoricé a 3 desarrolladores junior en buenas prácticas y TypeScript estricto."
+      "Integré pasarelas de pago de terceros (Stripe, PayPal) asegurando la compatibilidad PCI-DSS.",
+      "Desplegué infraestructura escalable usando AWS ECS y balanceadores de carga clásicos."
     ]
   }
 ];
+
+function ExperienceCard({ exp }: { exp: typeof experiences[0] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Decidimos mostrar los 2 primeros elementos por defecto.
+  const visibleItems = isExpanded ? exp.description : exp.description.slice(0, 2);
+  const hasMore = exp.description.length > 2;
+
+  return (
+    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+      {/* Timeline marker */}
+      <div className="flex items-center justify-center w-5 h-5 rounded-full border border-accent bg-obsidian text-accent shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 -translate-x-1/2" />
+      
+      <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] pl-4 md:pl-0">
+        <div className="flex flex-col bg-obsidian-light border border-obsidian-border p-6 rounded-xl shadow-lg transition-colors hover:border-slate-700">
+          <div className="flex justify-between items-center mb-1">
+            <h3 className="font-semibold text-lg text-slate-100">{exp.role}</h3>
+            <span className="text-xs font-mono text-slate-500 bg-obsidian px-2 py-1 rounded whitespace-nowrap ml-2">{exp.period}</span>
+          </div>
+          <div className="text-accent font-medium text-sm mb-4">{exp.company}</div>
+          
+          <ul className="space-y-2 text-slate-400 text-sm">
+            <AnimatePresence initial={false}>
+              {visibleItems.map((item, i) => (
+                <motion.li 
+                  key={i} 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="flex gap-2"
+                >
+                  <span className="text-accent mt-1 opacity-50 shrink-0">▹</span>
+                  <span>{item}</span>
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </ul>
+
+          {hasMore && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1 mt-4 text-xs font-medium text-slate-500 hover:text-accent transition-colors w-fit"
+            >
+              {isExpanded ? (
+                <>Ver menos <ChevronUp className="w-3 h-3" /></>
+              ) : (
+                <>Ver más <ChevronDown className="w-3 h-3" /></>
+              )}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Experience() {
   return (
@@ -40,28 +100,7 @@ export default function Experience() {
 
       <div className="space-y-12 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-obsidian-border before:to-transparent">
         {experiences.map((exp) => (
-          <div key={exp.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            {/* Timeline marker */}
-            <div className="flex items-center justify-center w-5 h-5 rounded-full border border-accent bg-obsidian text-accent shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 -translate-x-1/2" />
-            
-            <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] pl-4 md:pl-0">
-              <div className="flex flex-col bg-obsidian-light border border-obsidian-border p-6 rounded-xl shadow-lg transition-colors hover:border-slate-700">
-                <div className="flex justify-between items-center mb-1">
-                  <h3 className="font-semibold text-lg text-slate-100">{exp.role}</h3>
-                  <span className="text-xs font-mono text-slate-500 bg-obsidian px-2 py-1 rounded">{exp.period}</span>
-                </div>
-                <div className="text-accent font-medium text-sm mb-4">{exp.company}</div>
-                <ul className="space-y-2 text-slate-400 text-sm">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-accent mt-1 opacity-50">▹</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
+          <ExperienceCard key={exp.id} exp={exp} />
         ))}
       </div>
     </motion.div>
