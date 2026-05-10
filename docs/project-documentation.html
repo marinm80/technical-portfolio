@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Portafolio Técnico - Documentación del Proyecto</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1a1a2e;
+    line-height: 1.7;
+    font-size: 11pt;
+    padding: 0;
+    background: white;
+  }
+  
+  .container {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15mm;
+  }
+
+  /* Cover page */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    text-align: center;
+    background: linear-gradient(135deg, #0f1115 0%, #161a22 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .cover h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #38bdf8;
+  }
+  
+  .cover .subtitle {
+    font-size: 14pt;
+    color: #94a3b8;
+    margin-bottom: 40px;
+  }
+  
+  .cover .meta {
+    font-size: 10pt;
+    color: #64748b;
+    line-height: 2;
+  }
+  
+  .cover .meta strong { color: #cbd5e1; }
+
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #0f1115;
+    margin: 30px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #38bdf8;
+  }
+  
+  h2 {
+    font-size: 15pt;
+    font-weight: 600;
+    color: #161a22;
+    margin: 25px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    color: #334155;
+    margin: 18px 0 8px;
+  }
+  
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #475569;
+    margin: 14px 0 6px;
+  }
+  
+  p {
+    margin: 8px 0;
+    text-align: justify;
+  }
+  
+  a { color: #38bdf8; text-decoration: none; }
+  
+  strong { font-weight: 600; }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 25px 0;
+  }
+  
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.88em;
+    background: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #0f172a;
+  }
+  
+  pre {
+    background: #0f1115;
+    color: #e2e8f0;
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 9pt;
+    line-height: 1.5;
+    border-left: 4px solid #38bdf8;
+  }
+  
+  pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 9pt;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+  
+  th {
+    background: #0f1115;
+    color: #38bdf8;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  tr:nth-child(even) td { background: #f8fafc; }
+  
+  ul {
+    margin: 8px 0;
+    padding-left: 22px;
+  }
+  
+  li {
+    margin: 4px 0;
+  }
+  
+  li.task {
+    list-style: none;
+    margin-left: -22px;
+  }
+  
+  blockquote {
+    border-left: 4px solid #38bdf8;
+    padding: 10px 16px;
+    margin: 12px 0;
+    background: #f0f9ff;
+    color: #334155;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+  }
+
+  @media print {
+    body { padding: 0; }
+    .container { padding: 0; max-width: 100%; }
+    pre { page-break-inside: avoid; }
+    table { page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="cover">
+  <h1 style="border:none;">📘 Portafolio Técnico Personal</h1>
+  <div class="subtitle">Documentación Completa del Proyecto</div>
+  <div class="meta">
+    <strong>Versión:</strong> 1.0<br>
+    <strong>Fecha:</strong> Mayo 2026<br>
+    <strong>Autor:</strong> marinm80<br>
+    <strong>Repo:</strong> github.com/marinm80/technical-portfolio<br>
+    <strong>Stack:</strong> React + TypeScript + Tailwind CSS + Vite
+  </div>
+</div>
+
+<h1>Portafolio Técnico Personal — Documentación Completa del Proyecto</h1>
+
+<strong>Versión:</strong> 1.0  
+<strong>Fecha:</strong> Mayo 2026  
+<strong>Autor:</strong> marinm80  
+<strong>Repositorio:</strong> https://github.com/marinm80/technical-portfolio
+
+<hr>
+
+<h2>Tabla de Contenidos</h2>
+
+<p>1. <a href="#1-descripción-general">Descripción General</a></p>
+<p>2. <a href="#2-arquitectura-del-proyecto">Arquitectura del Proyecto</a></p>
+<p>3. <a href="#3-stack-tecnológico">Stack Tecnológico</a></p>
+<p>4. <a href="#4-estructura-de-archivos">Estructura de Archivos</a></p>
+<p>5. <a href="#5-fase-1--configuración-inicial-del-proyecto">Fase 1 — Configuración Inicial del Proyecto</a></p>
+<p>6. <a href="#6-fase-2--sistema-de-diseño-y-estilos">Fase 2 — Sistema de Diseño y Estilos</a></p>
+<p>7. <a href="#7-fase-3--layout-principal-y-navegación">Fase 3 — Layout Principal y Navegación</a></p>
+<p>8. <a href="#8-fase-4--desarrollo-de-páginas">Fase 4 — Desarrollo de Páginas</a></p>
+<p>9. <a href="#9-fase-5--internacionalización-i18n">Fase 5 — Internacionalización (i18n)</a></p>
+<p>10. <a href="#10-fase-6--formulario-de-contacto">Fase 6 — Formulario de Contacto</a></p>
+<p>11. <a href="#11-fase-7--cicd-con-github-actions">Fase 7 — CI/CD con GitHub Actions</a></p>
+<p>12. <a href="#12-fase-8--despliegue-a-producción">Fase 8 — Despliegue a Producción</a></p>
+<p>13. <a href="#13-estándares-de-ingeniería">Estándares de Ingeniería</a></p>
+<p>14. <a href="#14-comandos-de-referencia-rápida">Comandos de Referencia Rápida</a></p>
+<p>15. <a href="#15-variables-de-entorno">Variables de Entorno</a></p>
+<p>16. <a href="#16-roadmap-futuro">Roadmap Futuro</a></p>
+
+<hr>
+
+<h2>1. Descripción General</h2>
+
+<p>Este proyecto es un <strong>portafolio profesional multilingüe</strong> diseñado como una Single Page Application (SPA). La filosofía central es que el portafolio en sí mismo es un proyecto técnico: demuestra estándares de ingeniería robustos como TypeScript estricto, validación en tiempo de ejecución con Zod, internacionalización, animaciones de alto rendimiento y CI/CD automatizado.</p>
+
+<h3>Características principales:</h3>
+<ul><li><strong>Soporte Multilingüe</strong> (Español / Inglés) con detección automática del idioma del navegador</li>
+<li><strong>Tema oscuro corporativo</strong> con paleta obsidiana y acento cyan</li>
+<li><strong>Blog técnico</strong> con artículos expandibles</li>
+<li><strong>Animaciones fluidas</strong> con Framer Motion</li>
+<li><strong>Formulario de contacto</strong> validado con Zod y React Hook Form</li>
+<li><strong>CI/CD</strong> con GitHub Actions (lint, type-check, build)</li>
+<li><strong>SEO optimizado</strong> con metatags Open Graph y Twitter Cards</li>
+</ul>
+<hr>
+
+<h2>2. Arquitectura del Proyecto</h2>
+
+<pre><code>┌──────────────────────────────────────────────┐
+<p>│                 index.html                    │</p>
+<p>│          (SEO meta tags, fonts)               │</p>
+<p>├──────────────────────────────────────────────┤</p>
+<p>│               main.tsx                        │</p>
+<p>│    (React root, BrowserRouter, i18n init)     │</p>
+<p>├──────────────────────────────────────────────┤</p>
+<p>│                App.tsx                        │</p>
+<p>│         (React Router - Routes)               │</p>
+<p>├──────────────────────────────────────────────┤</p>
+<p>│            MainLayout.tsx                     │</p>
+<p>│   ┌──────────┬───────────────────────┐       │</p>
+<p>│   │ Sidebar  │    &lt;Outlet /&gt;         │       │</p>
+<p>│   │ (nav,    │  (páginas dinámicas)  │       │</p>
+<p>│   │  i18n,   │                       │       │</p>
+<p>│   │  links)  │  Home / Experience /  │       │</p>
+<p>│   │          │  Projects / Blog /    │       │</p>
+<p>│   │          │  Contact              │       │</p>
+<p>│   └──────────┴───────────────────────┘       │</p>
+<p>└──────────────────────────────────────────────┘</code></pre></p>
+
+<strong>Patrón:</strong> Layout persistente con Sidebar fijo a la izquierda (desktop) o drawer (mobile). Las páginas se renderizan en el <code><Outlet /></code> de React Router.
+
+<hr>
+
+<h2>3. Stack Tecnológico</h2>
+
+<table><thead><tr><th>Categoría</th><th>Tecnología</th><th>Versión</th><th>Propósito</th></tr></thead><tbody><tr><td>Framework</td><td>React</td><td>19.x</td><td>UI Components</td></tr>
+<tr><td>Bundler</td><td>Vite</td><td>8.x</td><td>Dev server y build</td></tr>
+<tr><td>Lenguaje</td><td>TypeScript</td><td>6.x</td><td>Tipado estático</td></tr>
+<tr><td>Estilos</td><td>Tailwind CSS</td><td>4.x</td><td>Utility-first CSS</td></tr>
+<tr><td>Animación</td><td>Framer Motion</td><td>12.x</td><td>Transiciones y animaciones</td></tr>
+<tr><td>Routing</td><td>React Router DOM</td><td>7.x</td><td>Navegación SPA</td></tr>
+<tr><td>i18n</td><td>i18next + react-i18next</td><td>26.x / 17.x</td><td>Internacionalización</td></tr>
+<tr><td>Formularios</td><td>React Hook Form</td><td>7.x</td><td>Gestión de formularios</td></tr>
+<tr><td>Validación</td><td>Zod</td><td>4.x</td><td>Validación runtime</td></tr>
+<tr><td>Íconos</td><td>Lucide React</td><td>1.x</td><td>Biblioteca de íconos</td></tr>
+<tr><td>CSS Utils</td><td>clsx + tailwind-merge</td><td>—</td><td>Composición de clases</td></tr>
+<tr><td>Linter</td><td>ESLint</td><td>10.x</td><td>Calidad de código</td></tr>
+<tr><td>CI/CD</td><td>GitHub Actions</td><td>—</td><td>Automatización</td></tr></tbody></table>
+<hr>
+
+<h2>4. Estructura de Archivos</h2>
+
+<pre><code>technical-portfolio/
+<p>├── .github/</p>
+<p>│   └── workflows/</p>
+<p>│       └── ci.yml                 # Pipeline CI/CD</p>
+<p>├── frontend/</p>
+<p>│   ├── public/                    # Assets estáticos</p>
+<p>│   ├── src/</p>
+<p>│   │   ├── assets/                # Imágenes y recursos</p>
+<p>│   │   ├── components/</p>
+<p>│   │   │   ├── Sidebar.tsx        # Navegación lateral</p>
+<p>│   │   │   └── icons/</p>
+<p>│   │   │       ├── GithubIcon.tsx # Ícono SVG GitHub</p>
+<p>│   │   │       └── LinkedinIcon.tsx # Ícono SVG LinkedIn</p>
+<p>│   │   ├── layouts/</p>
+<p>│   │   │   └── MainLayout.tsx     # Layout con sidebar + outlet</p>
+<p>│   │   ├── pages/</p>
+<p>│   │   │   ├── Home.tsx           # Página principal</p>
+<p>│   │   │   ├── Experience.tsx     # Timeline de experiencia</p>
+<p>│   │   │   ├── Projects.tsx       # Grid de proyectos</p>
+<p>│   │   │   ├── Blog.tsx           # Artículos técnicos</p>
+<p>│   │   │   └── Contact.tsx        # Formulario de contacto</p>
+<p>│   │   ├── i18n.ts                # Config de internacionalización</p>
+<p>│   │   ├── index.css              # Tema global (Tailwind)</p>
+<p>│   │   ├── App.css                # Estilos legacy (Vite scaffold)</p>
+<p>│   │   ├── App.tsx                # Definición de rutas</p>
+<p>│   │   └── main.tsx               # Entry point</p>
+<p>│   ├── index.html                 # HTML con SEO metatags</p>
+<p>│   ├── vite.config.ts             # Config de Vite</p>
+<p>│   ├── tsconfig.json              # Config TypeScript (raíz)</p>
+<p>│   ├── tsconfig.app.json          # Config TS para la app</p>
+<p>│   ├── tsconfig.node.json         # Config TS para Node</p>
+<p>│   ├── eslint.config.js           # Config ESLint</p>
+<p>│   └── package.json               # Dependencias y scripts</p>
+<p>├── docs/                          # Documentación del proyecto</p>
+<p>└── readme.md                      # README principal</code></pre></p>
+
+<hr>
+
+<h2>5. Fase 1 — Configuración Inicial del Proyecto</h2>
+
+<h3>Paso 1: Crear el proyecto con Vite</h3>
+
+<pre><code class="language-bash">mkdir technical-portfolio &amp;&amp; cd technical-portfolio
+<p>mkdir frontend &amp;&amp; cd frontend</p>
+<p>npx -y create-vite@latest ./ --template react-ts</p>
+<p>npm install</code></pre></p>
+
+<h3>Paso 2: Instalar dependencias del proyecto</h3>
+
+<pre><code class="language-bash"># Dependencias de producción
+<p>npm install react-router-dom framer-motion lucide-react i18next react-i18next react-hook-form @hookform/resolvers zod clsx tailwind-merge</p>
+
+<h1>Dependencias de desarrollo</h1>
+<p>npm install -D tailwindcss @tailwindcss/vite @types/node</code></pre></p>
+
+<h3>Paso 3: Configurar Vite (<code>vite.config.ts</code>)</h3>
+
+<pre><code class="language-typescript">import { defineConfig } from 'vite'
+<p>import react from '@vitejs/plugin-react'</p>
+<p>import tailwindcss from '@tailwindcss/vite'</p>
+
+<p>export default defineConfig({</p>
+<p>  plugins: [</p>
+<p>    react(),</p>
+<p>    tailwindcss(),</p>
+<p>  ],</p>
+<p>})</code></pre></p>
+
+<h3>Paso 4: Configurar TypeScript (<code>tsconfig.app.json</code>)</h3>
+
+<p>Puntos clave de la configuración:</p>
+<ul><li><code>target: "es2023"</code> — JavaScript moderno</li>
+<li><code>module: "esnext"</code> — Módulos ES nativos</li>
+<li><code>moduleResolution: "bundler"</code> — Resolución para Vite</li>
+<li><code>noUnusedLocals: true</code> — Error en variables sin usar</li>
+<li><code>noUnusedParameters: true</code> — Error en parámetros sin usar</li>
+<li><code>jsx: "react-jsx"</code> — Transform JSX automático</li>
+</ul>
+<h3>Paso 5: Inicializar Git</h3>
+
+<pre><code class="language-bash">cd ..  # Volver a la raíz del proyecto
+<p>git init</p>
+<p>git add .</p>
+<p>git commit -m "feat: initial project setup with Vite + React + TypeScript"</code></pre></p>
+
+<hr>
+
+<h2>6. Fase 2 — Sistema de Diseño y Estilos</h2>
+
+<h3>Paleta de colores (Tema Obsidiana)</h3>
+
+<table><thead><tr><th>Token</th><th>Hex</th><th>Uso</th></tr></thead><tbody><tr><td><code>--color-obsidian</code></td><td><code>#0f1115</code></td><td>Fondo principal</td></tr>
+<tr><td><code>--color-obsidian-light</code></td><td><code>#161a22</code></td><td>Fondo de tarjetas/sidebar</td></tr>
+<tr><td><code>--color-obsidian-border</code></td><td><code>#21262d</code></td><td>Bordes y separadores</td></tr>
+<tr><td><code>--color-accent</code></td><td><code>#38bdf8</code></td><td>Color de acento (sky-400)</td></tr></tbody></table>
+<h3>Tipografía</h3>
+
+<table><thead><tr><th>Tipo</th><th>Fuente</th><th>Uso</th></tr></thead><tbody><tr><td>Sans-serif</td><td>Inter</td><td>Texto general, UI</td></tr>
+<tr><td>Monospaced</td><td>Fira Code</td><td>Etiquetas técnicas, código</td></tr></tbody></table>
+<h3>Archivo <code>index.css</code></h3>
+
+<pre><code class="language-css">@import "tailwindcss";
+
+<p>@theme {</p>
+<p>  --color-obsidian: #0f1115;</p>
+<p>  --color-obsidian-light: #161a22;</p>
+<p>  --color-obsidian-border: #21262d;</p>
+<p>  --color-accent: #38bdf8;</p>
+
+<p>  --font-sans: "Inter", system-ui, sans-serif;</p>
+<p>  --font-mono: "Fira Code", monospace;</p>
+<p>}</p>
+
+<p>@layer base {</p>
+<p>  body {</p>
+<p>    @apply bg-obsidian text-slate-300 font-sans antialiased;</p>
+<p>  }</p>
+
+<p>  h1, h2, h3, h4, h5, h6 {</p>
+<p>    @apply text-slate-50 tracking-tight font-medium;</p>
+<p>  }</p>
+<p>}</code></pre></p>
+
+<h3>Fuentes en <code>index.html</code></h3>
+
+<pre><code class="language-html">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+<p>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p>&lt;link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</code></pre></p>
+
+<hr>
+
+<h2>7. Fase 3 — Layout Principal y Navegación</h2>
+
+<h3>7.1 Utilidad <code>cn()</code> para clases CSS</h3>
+
+<pre><code class="language-typescript">import { clsx, type ClassValue } from "clsx";
+<p>import { twMerge } from "tailwind-merge";</p>
+
+<p>function cn(...inputs: ClassValue[]) {</p>
+<p>  return twMerge(clsx(inputs));</p>
+<p>}</code></pre></p>
+
+<p>Esta función combina <code>clsx</code> (condicionales de clases) con <code>tailwind-merge</code> (resuelve conflictos de Tailwind).</p>
+
+<h3>7.2 MainLayout (<code>layouts/MainLayout.tsx</code>)</h3>
+
+<strong>Responsabilidad:</strong> Renderizar el Sidebar fijo y el área de contenido principal.
+
+<ul><li>En desktop: sidebar fijo de 256px (<code>w-64</code>) a la izquierda, contenido con <code>ml-64</code></li>
+<li>En mobile: header fijo con botón hamburguesa, sidebar como drawer con backdrop</li>
+<li>El <code><Outlet /></code> de React Router renderiza la página activa</li>
+</ul>
+<h3>7.3 Sidebar (<code>components/Sidebar.tsx</code>)</h3>
+
+<strong>Responsabilidad:</strong> Navegación principal, enlaces sociales, selector de idioma.
+
+<p>Elementos:</p>
+<ul><li><strong>Header:</strong> Nombre + título profesional</li>
+<li><strong>Navegación:</strong> Links a Overview, Experience, Projects, Blog (con <code>NavLink</code> para estado activo)</li>
+<li><strong>Footer:</strong> Links a GitHub/LinkedIn, link a Contact, botón de cambio de idioma</li>
+<li><strong>Mobile:</strong> Botón de cierre (X), backdrop con blur</li>
+</ul>
+<h3>7.4 Definición de Rutas (<code>App.tsx</code>)</h3>
+
+<pre><code class="language-typescript">&lt;Routes&gt;
+<p>  &lt;Route element={&lt;MainLayout /&gt;}&gt;</p>
+<p>    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;</p>
+<p>    &lt;Route path="/experience" element={&lt;Experience /&gt;} /&gt;</p>
+<p>    &lt;Route path="/projects" element={&lt;Projects /&gt;} /&gt;</p>
+<p>    &lt;Route path="/blog" element={&lt;Blog /&gt;} /&gt;</p>
+<p>    &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;</p>
+<p>    &lt;Route path="*" element={&lt;Navigate to="/" replace /&gt;} /&gt;</p>
+<p>  &lt;/Route&gt;</p>
+<p>&lt;/Routes&gt;</code></pre></p>
+
+<h3>7.5 Entry Point (<code>main.tsx</code>)</h3>
+
+<pre><code class="language-typescript">import { StrictMode } from 'react'
+<p>import { createRoot } from 'react-dom/client'</p>
+<p>import { BrowserRouter } from 'react-router-dom'</p>
+<p>import './index.css'</p>
+<p>import './i18n'</p>
+<p>import App from './App.tsx'</p>
+
+<p>createRoot(document.getElementById('root')!).render(</p>
+<p>  &lt;StrictMode&gt;</p>
+<p>    &lt;BrowserRouter&gt;</p>
+<p>      &lt;App /&gt;</p>
+<p>    &lt;/BrowserRouter&gt;</p>
+<p>  &lt;/StrictMode&gt;,</p>
+<p>)</code></pre></p>
+
+<hr>
+
+<h2>8. Fase 4 — Desarrollo de Páginas</h2>
+
+<h3>8.1 Home (<code>/</code>)</h3>
+
+<strong>Propósito:</strong> Primera impresión. Titular impactante, bio concisa, acceso rápido a experiencia y LinkedIn.
+
+<p>Secciones:</p>
+<p>1. <strong>Hero:</strong> Título animado con fade-in ("Ingeniero de Software / especializado en React y Node.js")</p>
+<p>2. <strong>Bio:</strong> Párrafo corto describiendo la propuesta de valor</p>
+<p>3. <strong>CTAs:</strong> Botón "Ver Experiencia" + link a LinkedIn</p>
+<p>4. <strong>Stack:</strong> Tags con las tecnologías principales (TypeScript, React, Next.js, Node.js, Tailwind CSS, PostgreSQL, AWS)</p>
+
+<p>Animación: <code>framer-motion</code> con <code>initial={{ opacity: 0, y: 10 }}</code> → <code>animate={{ opacity: 1, y: 0 }}</code></p>
+
+<h3>8.2 Experience (<code>/experience</code>)</h3>
+
+<strong>Propósito:</strong> Timeline vertical de experiencia laboral con énfasis en logros técnicos cuantificables.
+
+<p>Estructura de datos:</p>
+<pre><code class="language-typescript">{
+<p>  id: number,</p>
+<p>  role: string,          // "Senior Frontend Engineer"</p>
+<p>  company: string,       // "Tech Corp"</p>
+<p>  period: string,        // "2021 — Presente"</p>
+<p>  description: string[]  // Array de logros (viñetas)</p>
+<p>}</code></pre></p>
+
+<p>Interacción:</p>
+<ul><li>Se muestran los 2 primeros logros por defecto</li>
+<li>Botón "Ver más" / "Ver menos" con animación AnimatePresence</li>
+<li>Timeline con línea vertical gradiente y marcadores circulares con borde accent</li>
+</ul>
+<h3>8.3 Projects (<code>/projects</code>)</h3>
+
+<strong>Propósito:</strong> Grid de proyectos destacados con stack técnico y enlaces.
+
+<p>Estructura de datos:</p>
+<pre><code class="language-typescript">{
+<p>  id: number,</p>
+<p>  title: string,</p>
+<p>  description: string,</p>
+<p>  tags: string[],        // ["Node.js", "Docker", "RabbitMQ"]</p>
+<p>  github: string,</p>
+<p>  live: string</p>
+<p>}</code></pre></p>
+
+<p>Layout: Grid responsivo <code>grid-cols-1 md:grid-cols-2</code> con tarjetas que tienen hover en el borde.</p>
+
+<h3>8.4 Blog (<code>/blog</code>)</h3>
+
+<strong>Propósito:</strong> Artículos técnicos expandibles in-place.
+
+<p>Estructura de datos:</p>
+<pre><code class="language-typescript">{
+<p>  id: number,</p>
+<p>  title: string,</p>
+<p>  date: string,</p>
+<p>  readingTime: string,</p>
+<p>  summary: string,</p>
+<p>  content: string[]      // Párrafos del artículo</p>
+<p>}</code></pre></p>
+
+<p>Interacción:</p>
+<ul><li>Click en el título o botón expande/colapsa el contenido completo</li>
+<li>Animación de altura con AnimatePresence</li>
+<li>Metadata visible: fecha y tiempo de lectura</li>
+</ul>
+<h3>8.5 Contact (<code>/contact</code>)</h3>
+
+<strong>Propósito:</strong> Formulario de contacto validado con feedback visual.
+
+<p>Stack del formulario:</p>
+<ul><li><strong>React Hook Form:</strong> Gestión del estado del formulario</li>
+<li><strong>Zod:</strong> Esquema de validación runtime</li>
+<li><strong>@hookform/resolvers:</strong> Integración Zod ↔ React Hook Form</li>
+</ul>
+<p>Esquema de validación:</p>
+<pre><code class="language-typescript">const contactSchema = z.object({
+<p>  name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),</p>
+<p>  email: z.string().email("Debe ser un email válido."),</p>
+<p>  message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres."),</p>
+<p>});</code></pre></p>
+
+<p>Flujo:</p>
+<p>1. Usuario llena campos con validación en tiempo real</p>
+<p>2. Al enviar: estado <code>isSubmitting</code> deshabilita el botón y muestra "Enviando..."</p>
+<p>3. Éxito: se muestra pantalla de confirmación con ícono CheckCircle verde</p>
+<p>4. La confirmación desaparece automáticamente después de 5 segundos</p>
+
+<hr>
+
+<h2>9. Fase 5 — Internacionalización (i18n)</h2>
+
+<h3>Configuración (<code>i18n.ts</code>)</h3>
+
+<pre><code class="language-typescript">import i18n from 'i18next';
+<p>import { initReactI18next } from 'react-i18next';</p>
+
+<p>const resources = {</p>
+<p>  en: {</p>
+<p>    translation: {</p>
+<p>      "nav.overview": "Overview",</p>
+<p>      "nav.experience": "Experience",</p>
+<p>      // ... más claves</p>
+<p>    }</p>
+<p>  },</p>
+<p>  es: {</p>
+<p>    translation: {</p>
+<p>      "nav.overview": "Resumen",</p>
+<p>      "nav.experience": "Experiencia",</p>
+<p>      // ... más claves</p>
+<p>    }</p>
+<p>  }</p>
+<p>};</p>
+
+<p>i18n.use(initReactI18next).init({</p>
+<p>  resources,</p>
+<p>  lng: 'es',            // Idioma por defecto</p>
+<p>  fallbackLng: 'en',    // Fallback</p>
+<p>  interpolation: { escapeValue: false }</p>
+<p>});</code></pre></p>
+
+<h3>Uso en componentes</h3>
+
+<pre><code class="language-typescript">const { t, i18n } = useTranslation();
+
+<p>// Leer traducción</p>
+<p>&lt;h1&gt;{t('home.title')}&lt;/h1&gt;</p>
+
+<p>// Cambiar idioma</p>
+<p>const toggleLanguage = () =&gt; {</p>
+<p>  const newLang = i18n.language === 'es' ? 'en' : 'es';</p>
+<p>  i18n.changeLanguage(newLang);</p>
+<p>};</code></pre></p>
+
+<hr>
+
+<h2>10. Fase 6 — Formulario de Contacto</h2>
+
+<h3>Integración con EmailJS (producción)</h3>
+
+<p>Para conectar con EmailJS en producción:</p>
+
+<p>1. Crear cuenta en <a href="https://www.emailjs.com/">emailjs.com</a></p>
+<p>2. Configurar un servicio de email (Gmail, Outlook, etc.)</p>
+<p>3. Crear una plantilla de email</p>
+<p>4. Obtener las credenciales (Service ID, Template ID, Public Key)</p>
+<p>5. Configurar variables de entorno:</p>
+
+<pre><code class="language-env">VITE_EMAILJS_SERVICE_ID=tu_service_id
+<p>VITE_EMAILJS_TEMPLATE_ID=tu_template_id</p>
+<p>VITE_EMAILJS_PUBLIC_KEY=tu_public_key</code></pre></p>
+
+<p>6. Instalar el SDK: <code>npm install @emailjs/browser</code></p>
+
+<p>7. Reemplazar el mock en <code>Contact.tsx</code>:</p>
+
+<pre><code class="language-typescript">import emailjs from '@emailjs/browser';
+
+<p>const onSubmit = async (data: ContactFormValues) =&gt; {</p>
+<p>  try {</p>
+<p>    await emailjs.send(</p>
+<p>      import.meta.env.VITE_EMAILJS_SERVICE_ID,</p>
+<p>      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,</p>
+<p>      { from_name: data.name, reply_to: data.email, message: data.message },</p>
+<p>      import.meta.env.VITE_EMAILJS_PUBLIC_KEY</p>
+<p>    );</p>
+<p>    setIsSuccess(true);</p>
+<p>    reset();</p>
+<p>  } catch (error: unknown) {</p>
+<p>    if (error instanceof Error) {</p>
+<p>      console.error("EmailJS Error:", error.message);</p>
+<p>    }</p>
+<p>  }</p>
+<p>};</code></pre></p>
+
+<hr>
+
+<h2>11. Fase 7 — CI/CD con GitHub Actions</h2>
+
+<h3>Archivo <code>.github/workflows/ci.yml</code></h3>
+
+<pre><code class="language-yaml">name: CI/CD Pipeline
+
+<p>on:</p>
+<p>  push:</p>
+<p>    branches: [ main ]</p>
+<p>  pull_request:</p>
+<p>    branches: [ main ]</p>
+
+<p>jobs:</p>
+<p>  build-and-test:</p>
+<p>    runs-on: ubuntu-latest</p>
+<p>    defaults:</p>
+<p>      run:</p>
+<p>        working-directory: ./frontend</p>
+
+<p>    steps:</p>
+<p>    - uses: actions/checkout@v4</p>
+
+<p>    - name: Use Node.js 20.x</p>
+<p>      uses: actions/setup-node@v4</p>
+<p>      with:</p>
+<p>        node-version: '20.x'</p>
+<p>        cache: 'npm'</p>
+<p>        cache-dependency-path: ./frontend/package-lock.json</p>
+
+<p>    - name: Install dependencies</p>
+<p>      run: npm ci</p>
+
+<p>    - name: Run Linter</p>
+<p>      run: npm run lint</p>
+
+<p>    - name: Type Checking</p>
+<p>      run: npx tsc --noEmit</p>
+
+<p>    - name: Build Project</p>
+<p>      run: npm run build</code></pre></p>
+
+<h3>¿Qué verifica el pipeline?</h3>
+
+<table><thead><tr><th>Paso</th><th>Comando</th><th>Propósito</th></tr></thead><tbody><tr><td>Lint</td><td><code>npm run lint</code></td><td>Estilo y errores de código (ESLint)</td></tr>
+<tr><td>Types</td><td><code>npx tsc --noEmit</code></td><td>Errores de tipado TypeScript</td></tr>
+<tr><td>Build</td><td><code>npm run build</code></td><td>Compilación exitosa para producción</td></tr></tbody></table>
+<hr>
+
+<h2>12. Fase 8 — Despliegue a Producción</h2>
+
+<h3>Opción A: Vercel (recomendado para SPAs)</h3>
+
+<p>1. Conectar repositorio en <a href="https://vercel.com">vercel.com</a></p>
+<p>2. Configurar:</p>
+<p>   - <strong>Root Directory:</strong> <code>frontend</code></p>
+<p>   - <strong>Build Command:</strong> <code>npm run build</code></p>
+<p>   - <strong>Output Directory:</strong> <code>dist</code></p>
+<p>3. Añadir variables de entorno de EmailJS</p>
+<p>4. Deploy automático en cada push a <code>main</code></p>
+
+<h3>Opción B: Netlify</h3>
+
+<p>1. Conectar repositorio en <a href="https://netlify.com">netlify.com</a></p>
+<p>2. Configurar:</p>
+<p>   - <strong>Base directory:</strong> <code>frontend</code></p>
+<p>   - <strong>Build command:</strong> <code>npm run build</code></p>
+<p>   - <strong>Publish directory:</strong> <code>frontend/dist</code></p>
+<p>3. Agregar archivo <code>_redirects</code> en <code>public/</code>: <code>/* /index.html 200</code></p>
+
+<h3>Opción C: Render</h3>
+
+<p>1. Crear Static Site en <a href="https://render.com">render.com</a></p>
+<p>2. Configurar:</p>
+<p>   - <strong>Root Directory:</strong> <code>frontend</code></p>
+<p>   - <strong>Build Command:</strong> <code>npm install && npm run build</code></p>
+<p>   - <strong>Publish Directory:</strong> <code>dist</code></p>
+
+<hr>
+
+<h2>13. Estándares de Ingeniería</h2>
+
+<h3>TypeScript Estricto</h3>
+
+<ul><li><code>noUnusedLocals: true</code> — Variables sin usar = error de compilación</li>
+<li><code>noUnusedParameters: true</code> — Parámetros sin usar = error</li>
+<li>Sin <code>any</code> — Usar <code>unknown</code> + validación Zod para datos externos</li>
+</ul>
+<h3>Cláusulas de Guarda (Early Returns)</h3>
+
+<pre><code class="language-typescript">// ❌ Mal: if anidados
+<p>if (user) {</p>
+<p>  if (user.isActive) {</p>
+<p>    // lógica</p>
+<p>  }</p>
+<p>}</p>
+
+<p>// ✅ Bien: early returns</p>
+<p>if (!user) return null;</p>
+<p>if (!user.isActive) return &lt;Inactive /&gt;;</p>
+<p>// lógica principal</code></pre></p>
+
+<h3>Gestión Defensiva de Errores</h3>
+
+<pre><code class="language-typescript">try {
+<p>  const result = await riskyOperation();</p>
+<p>} catch (error: unknown) {</p>
+<p>  if (error instanceof Error) {</p>
+<p>    showError(error.message);</p>
+<p>  }</p>
+<p>}</code></pre></p>
+
+<h3>ESLint Configuración</h3>
+
+<ul><li><code>js.configs.recommended</code> — Reglas base de JavaScript</li>
+<li><code>tseslint.configs.recommended</code> — Reglas de TypeScript</li>
+<li><code>reactHooks.configs.flat.recommended</code> — Reglas de hooks de React</li>
+<li><code>reactRefresh.configs.vite</code> — Compatibilidad con HMR de Vite</li>
+</ul>
+<hr>
+
+<h2>14. Comandos de Referencia Rápida</h2>
+
+<pre><code class="language-bash"># Desarrollo (desde frontend/)
+<p>npm run dev          # Servidor de desarrollo (HMR)</p>
+<p>npm run build        # Build de producción</p>
+<p>npm run preview      # Preview del build</p>
+<p>npm run lint         # Ejecutar ESLint</p>
+
+<h1>Git</h1>
+<p>git add .</p>
+<p>git commit -m "feat: descripción del cambio"</p>
+<p>git push origin main</p>
+
+<h1>Type checking manual</h1>
+<p>npx tsc --noEmit</code></pre></p>
+
+<strong>IMPORTANTE:</strong> El script <code>npm run dev</code> debe ejecutarse desde la carpeta <code>frontend/</code>, no desde la raíz del proyecto.
+
+<pre><code class="language-bash">cd frontend
+<p>npm run dev</code></pre></p>
+
+<hr>
+
+<h2>15. Variables de Entorno</h2>
+
+<p>Crear archivo <code>frontend/.env.local</code>:</p>
+
+<pre><code class="language-env"># EmailJS (formulario de contacto)
+<p>VITE_EMAILJS_SERVICE_ID=tu_service_id_aqui</p>
+<p>VITE_EMAILJS_TEMPLATE_ID=tu_template_id_aqui</p>
+<p>VITE_EMAILJS_PUBLIC_KEY=tu_public_key_aqui</code></pre></p>
+
+<blockquote><strong>Nota:</strong> Las variables con prefijo <code>VITE_</code> son expuestas al código del cliente. Nunca colocar secretos sensibles aquí.</blockquote>
+
+<hr>
+
+<h2>16. Roadmap Futuro</h2>
+
+<ul><li class="task">☐ <strong>Blog con MDX:</strong> Migrar artículos a archivos <code>.mdx</code> con resaltado de sintaxis</li>
+<li class="task">☐ <strong>Tema Claro/Oscuro:</strong> Implementar toggle con React Context y persistencia en localStorage</li>
+<li class="task">☐ <strong>Testing:</strong> Vitest para unit tests, React Testing Library para componentes</li>
+<li class="task">☐ <strong>SEO dinámico:</strong> Integrar <code>react-helmet</code> para metatags por página</li>
+<li class="task">☐ <strong>CV descargable:</strong> Añadir PDF en <code>public/cv.pdf</code> con botón de descarga</li>
+<li class="task">☐ <strong>Despliegue a producción:</strong> Deploy en Vercel/Netlify/Render</li>
+</ul>
+<hr>
+
+<em>Documento generado como referencia completa para reconstruir el proyecto desde cero.</em>
+
+
+</div>
+</body>
+</html>
