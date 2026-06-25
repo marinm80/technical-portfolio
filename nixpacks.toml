@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_22"]
 cmds = ["cd frontend && npm install"]
 
 [phases.build]
-cmds = ["cd frontend && npm run build"]
+cmds = ["cd frontend && npx vite build"]
 
 [start]
 cmd = "npx serve frontend/dist"
