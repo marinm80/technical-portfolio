@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { User, Briefcase, Code, FileText, Mail, X, Globe, Sun, Moon } from "lucide-react";
+import { User, Code, FileText, Mail, X, Globe, Sun, Moon } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 import { LinkedinIcon } from "./icons/LinkedinIcon";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const navItems = [
     { path: "/", label: t('nav.overview'), icon: User },
-    { path: "/experience", label: t('nav.experience'), icon: Briefcase },
+    // Experiencia oculta hasta tener trayectoria real (ver App.tsx)
     { path: "/projects", label: t('nav.projects'), icon: Code },
     { path: "/blog", label: t('nav.blog'), icon: FileText },
   ];

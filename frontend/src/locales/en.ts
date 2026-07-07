@@ -20,6 +20,7 @@ const en = {
     subtitle: "specialized in React & Node.js",
     bio: "I transform complex problems into scalable and efficient systems. Focused on code quality, clean architectures, and exceptional user experiences.",
     viewExp: "View Experience",
+    viewProjects: "View Projects",
     linkedin: "LinkedIn",
     stack: "Main Stack",
   },

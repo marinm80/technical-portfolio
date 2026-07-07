@@ -20,11 +20,11 @@ describe('Home Page', () => {
     expect(screen.getByText(/Transformo problemas complejos/)).toBeInTheDocument();
   });
 
-  it('renders the "View Experience" CTA link', () => {
+  it('renders the "View Projects" CTA link', () => {
     render(<Home />);
-    const ctaLink = screen.getByText('Ver Experiencia');
+    const ctaLink = screen.getByText('Ver Proyectos');
     expect(ctaLink).toBeInTheDocument();
-    expect(ctaLink.closest('a')).toHaveAttribute('href', '/experience');
+    expect(ctaLink.closest('a')).toHaveAttribute('href', '/projects');
   });
 
   it('renders the LinkedIn link', () => {

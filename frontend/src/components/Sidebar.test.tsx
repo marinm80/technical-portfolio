@@ -23,9 +23,10 @@ describe('Sidebar Component', () => {
   it('renders all navigation links (in Spanish by default)', () => {
     render(<Sidebar {...defaultProps} />);
     expect(screen.getByText('Resumen')).toBeInTheDocument();
-    expect(screen.getByText('Experiencia')).toBeInTheDocument();
     expect(screen.getByText('Proyectos')).toBeInTheDocument();
     expect(screen.getByText('Artículos')).toBeInTheDocument();
+    // Experiencia oculta hasta tener trayectoria real
+    expect(screen.queryByText('Experiencia')).not.toBeInTheDocument();
   });
 
   it('renders the contact link', () => {
@@ -48,12 +49,10 @@ describe('Sidebar Component', () => {
   it('navigation links have correct href', () => {
     render(<Sidebar {...defaultProps} />);
     const overviewLink = screen.getByText('Resumen').closest('a');
-    const experienceLink = screen.getByText('Experiencia').closest('a');
     const projectsLink = screen.getByText('Proyectos').closest('a');
     const blogLink = screen.getByText('Artículos').closest('a');
 
     expect(overviewLink).toHaveAttribute('href', '/');
-    expect(experienceLink).toHaveAttribute('href', '/experience');
     expect(projectsLink).toHaveAttribute('href', '/projects');
     expect(blogLink).toHaveAttribute('href', '/blog');
   });

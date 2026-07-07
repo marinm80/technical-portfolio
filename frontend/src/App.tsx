@@ -4,7 +4,6 @@ import MainLayout from "./layouts/MainLayout";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 const Home = lazy(() => import("./pages/Home"));
-const Experience = lazy(() => import("./pages/Experience"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -15,7 +14,9 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/experience" element={<Experience />} />
+          {/* Sección Experiencia oculta hasta tener trayectoria real.
+              Para reactivar: restaurar esta ruta, el item del nav en
+              Sidebar.tsx y el CTA de Home.tsx (key home.viewExp). */}
           <Route path="/projects" element={<Projects />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />

@@ -28,9 +28,9 @@ describe('App Routing', () => {
     expect(await screen.findByText('Ingeniero de Software', {}, { timeout: 3000 })).toBeInTheDocument();
   });
 
-  it('renders Experience page on "/experience" route', async () => {
+  it('redirects the hidden "/experience" route to Home', async () => {
     renderWithRoute('/experience');
-    expect(await screen.findByRole('heading', { name: 'Experiencia' }, { timeout: 3000 })).toBeInTheDocument();
+    expect(await screen.findByText('Ingeniero de Software', {}, { timeout: 3000 })).toBeInTheDocument();
   });
 
   it('renders Projects page on "/projects" route', async () => {

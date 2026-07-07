@@ -29,10 +29,10 @@ export default function Home() {
 
         <div className="flex flex-wrap items-center gap-4 pt-4">
           <Link
-            to="/experience"
+            to="/projects"
             className="inline-flex items-center gap-2 bg-content-strong text-surface px-5 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity"
           >
-            {t('home.viewExp')}
+            {t('home.viewProjects')}
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a

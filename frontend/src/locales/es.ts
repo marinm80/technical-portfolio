@@ -15,6 +15,7 @@ const es = {
     subtitle: "especializado en React y Node.js",
     bio: "Transformo problemas complejos en sistemas escalables y eficientes. Enfocado en la calidad del código, arquitecturas limpias y experiencias de usuario excepcionales.",
     viewExp: "Ver Experiencia",
+    viewProjects: "Ver Proyectos",
     linkedin: "LinkedIn",
     stack: "Stack Principal",
   },
