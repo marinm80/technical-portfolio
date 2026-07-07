@@ -87,17 +87,15 @@ Cubre: validación del formulario (edge cases), interacción de toggles (idioma 
 
 **CI** (GitHub Actions, Node 22): `npm ci` → ESLint → `tsc -b` → `npm test` → `vite build`.
 
-**Deploy**: Docker Compose con imagen multi-stage ([frontend/Dockerfile](frontend/Dockerfile): build con Node 22 → runtime `nginx:alpine`) desplegada en un VPS detrás de **Nginx Proxy Manager** (TLS termina en el proxy). El nginx interno sirve la SPA con gzip, headers de seguridad (CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) y cache inmutable para los assets con hash.
+**Deploy**: Docker Compose con imagen multi-stage ([frontend/Dockerfile](frontend/Dockerfile): build con Node 22 → runtime `nginx:alpine`), desplegado en un VPS con **Coolify** (Build Pack: *Docker Compose*, location `/docker-compose.yml`). Coolify termina el TLS y enruta el dominio hacia el puerto 80 del contenedor; las `VITE_*` se definen como Environment Variables en Coolify y se interpolan como build args. El nginx interno sirve la SPA con gzip, headers de seguridad (CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) y cache inmutable para los assets con hash.
 
 ```bash
-# En la raíz del repo: copiar .env.example a .env y completar las VITE_*
-cp .env.example .env
-
-# Build + deploy (compose inyecta las VITE_* como build args)
-docker compose up -d --build
+# Prueba local (publica el puerto 8080 del host):
+cp .env.example .env   # completar las VITE_*
+docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 ```
 
-> Las `VITE_*` se inyectan en **build time**: tras cambiar el `.env` hay que reconstruir (`docker compose up -d --build`).
+> Las `VITE_*` se inyectan en **build time**: tras cambiarlas (en Coolify o en `.env`) hay que reconstruir/redesplegar.
 
 ## 🗺️ Roadmap
 

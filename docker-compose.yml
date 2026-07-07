@@ -1,18 +1,22 @@
+# Compose para Coolify (Build Pack: Docker Compose, location /docker-compose.yml).
+# Coolify enruta el dominio hacia el puerto expuesto vía su propio proxy;
+# no se publican puertos en el host ni se fija container_name.
+#
+# Para probar en local con puerto publicado:
+#   docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 services:
   portfolio:
     build:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        # Compose lee estas variables del .env junto a este archivo.
-        # Todas son opcionales: sin ellas el sitio funciona en modo degradado.
+        # En Coolify: definir estas variables en Environment Variables (se
+        # interpolan aquí). En local: compose las lee del .env junto a este
+        # archivo. Todas opcionales: sin ellas el sitio corre en modo degradado.
         VITE_WP_API_URL: ${VITE_WP_API_URL:-}
         VITE_EMAILJS_SERVICE_ID: ${VITE_EMAILJS_SERVICE_ID:-}
         VITE_EMAILJS_TEMPLATE_ID: ${VITE_EMAILJS_TEMPLATE_ID:-}
         VITE_EMAILJS_PUBLIC_KEY: ${VITE_EMAILJS_PUBLIC_KEY:-}
-    container_name: portfolio
     restart: unless-stopped
-    ports:
-      # Nginx Proxy Manager (en el VPS) apunta a este puerto del host.
-      # Alternativa: quitar ports y unir el contenedor a la red de NPM.
-      - "${PORTFOLIO_PORT:-8080}:80"
+    expose:
+      - "80"

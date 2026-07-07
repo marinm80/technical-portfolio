@@ -1,0 +1,6 @@
+# Override para pruebas locales: publica el puerto en el host.
+# Uso: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+services:
+  portfolio:
+    ports:
+      - "${PORTFOLIO_PORT:-8080}:80"
