@@ -1,9 +1,24 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '../test/test-utils';
 import userEvent from '@testing-library/user-event';
 import Contact from './Contact';
 
+const mocks = vi.hoisted(() => ({
+  isEmailConfigured: vi.fn(() => true),
+  sendContactEmail: vi.fn(() => new Promise<void>((resolve) => setTimeout(resolve, 50))),
+}));
+
+vi.mock('../services/email', () => ({
+  isEmailConfigured: mocks.isEmailConfigured,
+  sendContactEmail: mocks.sendContactEmail,
+}));
+
 describe('Contact Page', () => {
+  beforeEach(() => {
+    mocks.isEmailConfigured.mockReturnValue(true);
+    mocks.sendContactEmail.mockClear();
+  });
+
   it('renders the page title', () => {
     render(<Contact />);
     expect(screen.getByText('Contacto')).toBeInTheDocument();
@@ -105,8 +120,8 @@ describe('Contact Page', () => {
 
   it('renders placeholders in form fields', () => {
     render(<Contact />);
-    expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('john@example.com')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Tu nombre')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('tu@email.com')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Detalla tu propuesta aquí...')).toBeInTheDocument();
   });
 
@@ -125,5 +140,48 @@ describe('Contact Page', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Enviando/i })).toBeDisabled();
     });
+  });
+
+  it('sends the email through the email service', async () => {
+    const user = userEvent.setup();
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText('Nombre'), 'Ana García');
+    await user.type(screen.getByLabelText('Email'), 'ana@example.com');
+    await user.type(screen.getByLabelText('Mensaje'), 'Mensaje de prueba con longitud válida.');
+    await user.click(screen.getByRole('button', { name: /Enviar Mensaje/i }));
+
+    await waitFor(() => {
+      expect(mocks.sendContactEmail).toHaveBeenCalledWith({
+        name: 'Ana García',
+        email: 'ana@example.com',
+        message: 'Mensaje de prueba con longitud válida.',
+      });
+    });
+  });
+
+  it('shows a send error with mailto fallback when the service fails', async () => {
+    mocks.sendContactEmail.mockRejectedValueOnce(new Error('emailjs down'));
+    const user = userEvent.setup();
+    render(<Contact />);
+
+    await user.type(screen.getByLabelText('Nombre'), 'Ana García');
+    await user.type(screen.getByLabelText('Email'), 'ana@example.com');
+    await user.type(screen.getByLabelText('Mensaje'), 'Mensaje de prueba con longitud válida.');
+    await user.click(screen.getByRole('button', { name: /Enviar Mensaje/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/No se pudo enviar el mensaje/)).toBeInTheDocument();
+    });
+  });
+
+  it('shows a mailto fallback instead of the form when EmailJS is not configured', () => {
+    mocks.isEmailConfigured.mockReturnValue(false);
+    render(<Contact />);
+
+    expect(screen.queryByLabelText('Nombre')).not.toBeInTheDocument();
+    expect(screen.getByText(/no está disponible todavía/)).toBeInTheDocument();
+    const mailto = screen.getByRole('link', { name: /rocanegras/ });
+    expect(mailto.getAttribute('href')).toMatch(/^mailto:/);
   });
 });

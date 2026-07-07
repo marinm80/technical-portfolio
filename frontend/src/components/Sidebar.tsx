@@ -1,14 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { User, Briefcase, Code, FileText, Mail, X, Globe } from "lucide-react";
+import { User, Briefcase, Code, FileText, Mail, X, Globe, Sun, Moon } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
 import { LinkedinIcon } from "./icons/LinkedinIcon";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 import { useTranslation } from "react-i18next";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from "../lib/utils";
+import { profile } from "../data/profile";
+import { useTheme } from "../context/ThemeContext";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -17,6 +14,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { t, i18n } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'es' ? 'en' : 'es';
@@ -34,7 +32,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <>
       {/* Mobile Backdrop */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 z-30 md:hidden backdrop-blur-sm transition-opacity"
           onClick={onClose}
         />
@@ -42,17 +40,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 w-64 bg-obsidian-light border-r border-obsidian-border flex flex-col z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
+        "fixed inset-y-0 left-0 w-64 bg-surface-alt border-r border-edge flex flex-col z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-8 pb-4 flex justify-between items-start">
           <div>
-            <h1 className="text-xl font-bold text-slate-50 tracking-tight">Tu Nombre</h1>
-            <p className="text-sm text-accent mt-1 font-mono">Software Engineer</p>
+            <h1 className="text-xl font-bold text-content-strong tracking-tight">{profile.name}</h1>
+            <p className="text-sm text-accent mt-1 font-mono">{profile.role}</p>
           </div>
-          <button 
+          <button
             onClick={onClose}
-            className="md:hidden text-slate-400 hover:text-slate-100 transition-colors -mr-4 -mt-2 p-2"
+            className="md:hidden text-content-muted hover:text-content-strong transition-colors -mr-4 -mt-2 p-2"
           >
             <X className="w-5 h-5" />
           </button>
@@ -69,7 +67,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group",
                   isActive
                     ? "bg-accent/10 text-accent"
-                    : "text-slate-400 hover:bg-obsidian-border hover:text-slate-200"
+                    : "text-content-muted hover:bg-edge hover:text-content"
                 )
               }
             >
@@ -82,12 +80,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-obsidian-border flex flex-col gap-2">
+        <div className="p-4 border-t border-edge flex flex-col gap-2">
           <div className="flex gap-4 px-4 py-2 mb-2">
-            <a href="https://github.com/tu-usuario" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-accent transition-colors" title="GitHub">
+            <a href={profile.github} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="GitHub">
               <GithubIcon className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-accent transition-colors" title="LinkedIn">
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="LinkedIn">
               <LinkedinIcon className="w-5 h-5" />
             </a>
           </div>
@@ -98,20 +96,33 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             className={({ isActive }) =>
               cn(
                 "flex items-center gap-3 px-4 py-2 text-sm transition-colors group rounded-md",
-                isActive ? "text-accent" : "text-slate-400 hover:text-slate-200"
+                isActive ? "text-accent" : "text-content-muted hover:text-content"
               )
             }
           >
             <Mail className="w-4 h-4 group-hover:text-accent transition-colors" />
             {t('nav.contact')}
           </NavLink>
-          
+
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-3 px-4 py-2 text-sm text-slate-400 hover:text-slate-200 transition-colors group rounded-md text-left"
+            className="flex items-center gap-3 px-4 py-2 text-sm text-content-muted hover:text-content transition-colors group rounded-md text-left"
           >
             <Globe className="w-4 h-4 group-hover:text-accent transition-colors" />
+            {/* Convención: el label muestra el idioma destino en su propio idioma */}
             {i18n.language === 'es' ? 'English' : 'Español'}
+          </button>
+
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-3 px-4 py-2 text-sm text-content-muted hover:text-content transition-colors group rounded-md text-left"
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-4 h-4 group-hover:text-accent transition-colors" />
+            ) : (
+              <Moon className="w-4 h-4 group-hover:text-accent transition-colors" />
+            )}
+            {theme === 'dark' ? t('sidebar.themeLight') : t('sidebar.themeDark')}
           </button>
         </div>
       </aside>

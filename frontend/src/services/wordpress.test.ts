@@ -1,0 +1,74 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { getLatestPosts, isBlogConfigured } from './wordpress';
+
+const validPost = {
+  id: 1,
+  slug: 'hola-mundo',
+  link: 'https://blog.example.com/hola-mundo',
+  date: '2026-06-01T10:00:00',
+  title: { rendered: 'Hola mundo' },
+  excerpt: { rendered: '<p>Resumen</p>' },
+};
+
+describe('wordpress service', () => {
+  beforeEach(() => {
+    vi.unstubAllEnvs();
+    vi.unstubAllGlobals();
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.unstubAllGlobals();
+  });
+
+  it('isBlogConfigured is false without VITE_WP_API_URL', () => {
+    vi.stubEnv('VITE_WP_API_URL', '');
+    expect(isBlogConfigured()).toBe(false);
+  });
+
+  it('isBlogConfigured is true with VITE_WP_API_URL', () => {
+    vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com');
+    expect(isBlogConfigured()).toBe(true);
+  });
+
+  it('getLatestPosts rejects when not configured', async () => {
+    vi.stubEnv('VITE_WP_API_URL', '');
+    await expect(getLatestPosts()).rejects.toThrow(/not configured/);
+  });
+
+  it('fetches and validates posts from the WP REST API', async () => {
+    vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com/');
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [validPost],
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const posts = await getLatestPosts(5);
+
+    expect(posts).toHaveLength(1);
+    expect(posts[0]!.title.rendered).toBe('Hola mundo');
+    // La URL base pierde el slash final y usa per_page + _fields
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://blog.example.com/wp-json/wp/v2/posts?per_page=5&_fields=id,slug,link,date,title,excerpt'
+    );
+  });
+
+  it('rejects on HTTP errors', async () => {
+    vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 500 }));
+    await expect(getLatestPosts()).rejects.toThrow(/500/);
+  });
+
+  it('rejects when the response shape does not match the contract', async () => {
+    vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com');
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => [{ id: 'not-a-number', unexpected: true }],
+      })
+    );
+    await expect(getLatestPosts()).rejects.toThrow();
+  });
+});

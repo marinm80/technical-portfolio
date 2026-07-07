@@ -1,109 +1,84 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Loader2, PenLine, TriangleAlert } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import Seo from "../components/Seo";
+import { getLatestPosts, isBlogConfigured } from "../services/wordpress";
+import type { WordPressPost } from "../types/wordpress";
 
-const articles = [
-  {
-    id: 1,
-    title: "Understanding React Server Components",
-    date: "May 15, 2026",
-    readingTime: "5 min read",
-    summary: "A deep dive into how Server Components change the rendering paradigm in modern React applications and how to leverage them for performance.",
-    content: [
-      "Los React Server Components (RSC) representan un cambio fundamental en cómo pensamos sobre la hidratación de las aplicaciones.",
-      "A diferencia de los componentes tradicionales que envían JavaScript al cliente para ser ejecutado, los RSC se renderizan exclusivamente en el servidor y envían HTML y UI precomputada. Esto significa cero impacto en el bundle de JavaScript del usuario.",
-      "Aprender a diferenciar entre un 'Server Component' y un 'Client Component' (mediante 'use client') es esencial para optimizar el rendimiento sin perder la interactividad donde realmente importa."
-    ]
-  },
-  {
-    id: 2,
-    title: "Defensive Programming in TypeScript",
-    date: "April 02, 2026",
-    readingTime: "8 min read",
-    summary: "Why avoiding 'any' isn't enough. How to use Zod for runtime validation and type guards to build resilient frontends.",
-    content: [
-      "TypeScript es increíble para el tiempo de desarrollo, pero una vez que el código se compila a JavaScript y se ejecuta en el navegador, todas las interfaces desaparecen. Si dependes de una API externa, no tienes garantías reales.",
-      "Aquí es donde entra Zod. Al definir esquemas de validación, puedes interceptar respuestas de red y validarlas en tiempo de ejecución. Si la API cambia su contrato silenciosamente, tu frontend lanzará un error controlado en lugar de colapsar con el clásico 'undefined is not a function'.",
-      "Adoptar programación defensiva significa no confiar ciegamente en los datos que no controlas directamente."
-    ]
-  },
-  {
-    id: 3,
-    title: "Micro-frontends with Module Federation",
-    date: "January 20, 2026",
-    readingTime: "12 min read",
-    summary: "Scaling large React applications across multiple autonomous teams without losing the Single Page Application feel.",
-    content: [
-      "A medida que las organizaciones de ingeniería crecen, mantener un monolito de frontend se vuelve insostenible. Los tiempos de build aumentan exponencialmente y los conflictos de ramas son diarios.",
-      "Webpack Module Federation permite dividir un monolito en múltiples micro-frontends que se cargan dinámicamente en tiempo de ejecución. Un equipo puede desplegar su sección del producto sin necesidad de que los demás compilen nada.",
-      "El principal desafío arquitectónico no es técnico, sino organizacional: decidir cómo compartir el estado global y mantener una consistencia visual unificada (Design System)."
-    ]
-  }
-];
+type BlogStatus = "loading" | "success" | "error" | "empty";
 
-function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+/** WP devuelve title/excerpt como HTML; extraemos solo el texto plano. */
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return (doc.body.textContent ?? "").trim();
+}
+
+function formatDate(iso: string, locale: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" });
+}
+
+function PostCard({ post, index, locale }: { post: WordPressPost; index: number; locale: string }) {
+  const { t } = useTranslation();
 
   return (
-    <motion.article 
+    <motion.article
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className={`group block p-6 -mx-6 rounded-2xl transition-colors border border-transparent ${isExpanded ? 'bg-obsidian border-obsidian-border shadow-lg' : 'hover:bg-obsidian-light'}`}
+      className="group block p-6 -mx-6 rounded-2xl transition-colors border border-transparent hover:bg-surface-alt"
     >
-      <div 
-        className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2 cursor-pointer"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <h3 className="text-lg font-semibold text-slate-100 group-hover:text-accent transition-colors">
-          {article.title}
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+        <h3 className="text-lg font-semibold text-content-strong group-hover:text-accent transition-colors">
+          {stripHtml(post.title.rendered)}
         </h3>
-        <div className="text-xs font-mono text-slate-500 mt-2 sm:mt-0 whitespace-nowrap">
-          {article.date} · {article.readingTime}
+        <div className="text-xs font-mono text-content-muted mt-2 sm:mt-0 whitespace-nowrap">
+          {formatDate(post.date, locale)}
         </div>
       </div>
-      
-      <p className="text-slate-400 text-sm leading-relaxed mb-2">
-        {article.summary}
+
+      <p className="text-content-muted text-sm leading-relaxed mb-2">
+        {stripHtml(post.excerpt.rendered)}
       </p>
 
-      <AnimatePresence initial={false}>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-4 pt-4 border-t border-obsidian-border space-y-4">
-              {article.content.map((paragraph, i) => (
-                <p key={i} className="text-slate-300 text-sm leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsExpanded(!isExpanded);
-        }}
-        className="flex items-center gap-1.5 mt-4 text-xs font-medium text-accent hover:text-white transition-colors"
+      <a
+        href={post.link}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-1.5 mt-4 text-xs font-medium text-accent hover:text-content-strong transition-colors"
       >
-        {isExpanded ? (
-          <>Cerrar artículo <ChevronUp className="w-3.5 h-3.5" /></>
-        ) : (
-          <>Leer artículo <ChevronDown className="w-3.5 h-3.5" /></>
-        )}
-      </button>
+        {t('blog.readArticle')} <ExternalLink className="w-3.5 h-3.5" />
+      </a>
     </motion.article>
   );
 }
 
 export default function Blog() {
+  const { t, i18n } = useTranslation();
+  const [status, setStatus] = useState<BlogStatus>(isBlogConfigured() ? "loading" : "empty");
+  const [posts, setPosts] = useState<WordPressPost[]>([]);
+
+  useEffect(() => {
+    if (!isBlogConfigured()) return;
+
+    let cancelled = false;
+    getLatestPosts(10)
+      .then((result) => {
+        if (cancelled) return;
+        setPosts(result);
+        setStatus(result.length > 0 ? "success" : "empty");
+      })
+      .catch(() => {
+        if (!cancelled) setStatus("error");
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -111,16 +86,42 @@ export default function Blog() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
+      <Seo title={t('meta.blog.title')} description={t('meta.blog.description')} />
+
       <div>
-        <h1 className="text-3xl font-bold mb-2">Escritos & Artículos</h1>
-        <p className="text-slate-400">Pensamientos sobre ingeniería de software, arquitectura y la web.</p>
+        <h1 className="text-3xl font-bold mb-2">{t('blog.title')}</h1>
+        <p className="text-content-muted">{t('blog.subtitle')}</p>
       </div>
 
-      <div className="space-y-4">
-        {articles.map((article, i) => (
-          <ArticleCard key={article.id} article={article} index={i} />
-        ))}
-      </div>
+      {status === "loading" && (
+        <div className="flex items-center gap-3 text-content-muted py-12" role="status">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          {t('blog.loading')}
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="flex items-center gap-3 text-content-muted py-12">
+          <TriangleAlert className="w-5 h-5 text-red-400 shrink-0" />
+          {t('blog.error')}
+        </div>
+      )}
+
+      {status === "empty" && (
+        <div className="flex flex-col items-center justify-center text-center py-16 space-y-4 border border-dashed border-edge rounded-2xl">
+          <PenLine className="w-10 h-10 text-content-muted" />
+          <h2 className="text-xl font-semibold">{t('blog.empty.title')}</h2>
+          <p className="text-content-muted max-w-sm">{t('blog.empty.description')}</p>
+        </div>
+      )}
+
+      {status === "success" && (
+        <div className="space-y-4">
+          {posts.map((post, i) => (
+            <PostCard key={post.id} post={post} index={i} locale={i18n.language} />
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 }

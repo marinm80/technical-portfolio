@@ -1,0 +1,18 @@
+services:
+  portfolio:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Compose lee estas variables del .env junto a este archivo.
+        # Todas son opcionales: sin ellas el sitio funciona en modo degradado.
+        VITE_WP_API_URL: ${VITE_WP_API_URL:-}
+        VITE_EMAILJS_SERVICE_ID: ${VITE_EMAILJS_SERVICE_ID:-}
+        VITE_EMAILJS_TEMPLATE_ID: ${VITE_EMAILJS_TEMPLATE_ID:-}
+        VITE_EMAILJS_PUBLIC_KEY: ${VITE_EMAILJS_PUBLIC_KEY:-}
+    container_name: portfolio
+    restart: unless-stopped
+    ports:
+      # Nginx Proxy Manager (en el VPS) apunta a este puerto del host.
+      # Alternativa: quitar ports y unir el contenedor a la red de NPM.
+      - "${PORTFOLIO_PORT:-8080}:80"

@@ -1,21 +1,52 @@
 @import "tailwindcss";
 
-@theme {
-  --color-obsidian: #0f1115;
-  --color-obsidian-light: #161a22;
-  --color-obsidian-border: #21262d;
-  --color-accent: #38bdf8;
-  
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Tokens semánticos: las utilidades (bg-surface, text-content, etc.) apuntan a
+ * variables CSS que cambian según la clase .dark en <html>.
+ */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-edge: var(--edge);
+  --color-content: var(--content);
+  --color-content-strong: var(--content-strong);
+  --color-content-muted: var(--content-muted);
+  --color-accent: var(--accent);
+
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "Fira Code", monospace;
 }
 
+:root {
+  /* Tema claro */
+  --surface: #f8fafc;
+  --surface-alt: #ffffff;
+  --edge: #e2e8f0;
+  --content: #334155;
+  --content-strong: #0f172a;
+  --content-muted: #64748b;
+  --accent: #0284c7;
+}
+
+.dark {
+  /* Tema oscuro (paleta obsidian original) */
+  --surface: #0f1115;
+  --surface-alt: #161a22;
+  --edge: #21262d;
+  --content: #cbd5e1;
+  --content-strong: #f8fafc;
+  --content-muted: #94a3b8;
+  --accent: #38bdf8;
+}
+
 @layer base {
   body {
-    @apply bg-obsidian text-slate-300 font-sans antialiased;
+    @apply bg-surface text-content font-sans antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-50 tracking-tight font-medium;
+    @apply text-content-strong tracking-tight font-medium;
   }
 }

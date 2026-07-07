@@ -1,21 +1,33 @@
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
-import { Send, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { Send, CheckCircle, MailWarning } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
+import Seo from "../components/Seo";
+import { profile } from "../data/profile";
+import { isEmailConfigured, sendContactEmail } from "../services/email";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
-  email: z.string().email("Debe ser un email válido."),
-  message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres."),
-});
+function makeContactSchema(t: TFunction) {
+  return z.object({
+    name: z.string().min(2, t('contact.validation.nameMin')),
+    email: z.string().email(t('contact.validation.emailInvalid')),
+    message: z.string().min(10, t('contact.validation.messageMin')),
+  });
+}
 
-type ContactFormValues = z.infer<typeof contactSchema>;
+type ContactFormValues = z.infer<ReturnType<typeof makeContactSchema>>;
 
 export default function Contact() {
+  const { t } = useTranslation();
   const [isSuccess, setIsSuccess] = useState(false);
-  
+  const [sendError, setSendError] = useState(false);
+
+  // `t` cambia de identidad al cambiar el idioma, regenerando los mensajes de validación.
+  const contactSchema = useMemo(() => makeContactSchema(t), [t]);
+
   const {
     register,
     handleSubmit,
@@ -26,12 +38,15 @@ export default function Contact() {
   });
 
   const onSubmit = async (data: ContactFormValues) => {
-    // Simulating EmailJS call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Mock Email Sent:", data);
-    setIsSuccess(true);
-    reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    setSendError(false);
+    try {
+      await sendContactEmail(data);
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch {
+      setSendError(true);
+    }
   };
 
   return (
@@ -41,65 +56,83 @@ export default function Contact() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
+      <Seo title={t('meta.contact.title')} description={t('meta.contact.description')} />
+
       <div>
-        <h1 className="text-3xl font-bold mb-2">Contacto</h1>
-        <p className="text-slate-400">¿Tienes un proyecto en mente o una oportunidad laboral? Hablemos.</p>
+        <h1 className="text-3xl font-bold mb-2">{t('contact.title')}</h1>
+        <p className="text-content-muted">{t('contact.subtitle')}</p>
       </div>
 
-      <div className="bg-obsidian-light border border-obsidian-border p-6 sm:p-8 rounded-xl">
-        {isSuccess ? (
-          <motion.div 
+      <div className="bg-surface-alt border border-edge p-6 sm:p-8 rounded-xl">
+        {!isEmailConfigured() ? (
+          <div className="flex flex-col items-center justify-center text-center py-12 space-y-4">
+            <MailWarning className="w-12 h-12 text-content-muted" />
+            <p className="text-content-muted">
+              {t('contact.notConfigured')}{" "}
+              <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
+                {profile.email}
+              </a>
+            </p>
+          </div>
+        ) : isSuccess ? (
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center justify-center text-center py-12 space-y-4"
           >
             <CheckCircle className="w-16 h-16 text-emerald-500" />
-            <h3 className="text-xl font-bold text-slate-100">¡Mensaje enviado!</h3>
-            <p className="text-slate-400">Te responderé lo más pronto posible.</p>
+            <h3 className="text-xl font-bold text-content-strong">{t('contact.success.title')}</h3>
+            <p className="text-content-muted">{t('contact.success.message')}</p>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium text-slate-300">Nombre</label>
+              <label htmlFor="name" className="text-sm font-medium text-content">{t('contact.name')}</label>
               <input
                 {...register("name")}
                 id="name"
-                className="w-full bg-obsidian border border-obsidian-border rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
-                placeholder="John Doe"
+                className="w-full bg-surface border border-edge rounded-lg px-4 py-2.5 text-content-strong focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
+                placeholder={t('contact.placeholder.name')}
               />
               {errors.name && <p className="text-red-400 text-sm">{errors.name.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-slate-300">Email</label>
+              <label htmlFor="email" className="text-sm font-medium text-content">{t('contact.email')}</label>
               <input
                 {...register("email")}
                 id="email"
                 type="email"
-                className="w-full bg-obsidian border border-obsidian-border rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
-                placeholder="john@example.com"
+                className="w-full bg-surface border border-edge rounded-lg px-4 py-2.5 text-content-strong focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
+                placeholder={t('contact.placeholder.email')}
               />
               {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-medium text-slate-300">Mensaje</label>
+              <label htmlFor="message" className="text-sm font-medium text-content">{t('contact.message')}</label>
               <textarea
                 {...register("message")}
                 id="message"
                 rows={5}
-                className="w-full bg-obsidian border border-obsidian-border rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none"
-                placeholder="Detalla tu propuesta aquí..."
+                className="w-full bg-surface border border-edge rounded-lg px-4 py-2.5 text-content-strong focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none"
+                placeholder={t('contact.placeholder.message')}
               />
               {errors.message && <p className="text-red-400 text-sm">{errors.message.message}</p>}
             </div>
 
+            {sendError && (
+              <p className="text-red-400 text-sm">
+                {t('contact.errorSend', { email: profile.email })}
+              </p>
+            )}
+
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-100 text-obsidian px-6 py-2.5 rounded-lg font-medium hover:bg-white transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-content-strong text-surface px-6 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+              {isSubmitting ? t('contact.submitting') : t('contact.submit')}
               {!isSubmitting && <Send className="w-4 h-4" />}
             </button>
           </form>

@@ -2,28 +2,36 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <!-- Anti-FOUC: aplica el tema antes del primer paint -->
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        var dark = stored ? stored === "dark" : !window.matchMedia("(prefers-color-scheme: light)").matches;
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
+
     <!-- SEO Meta Tags -->
-    <title>Tu Nombre | Software Engineer</title>
-    <meta name="description" content="Portafolio técnico de Tu Nombre. Ingeniero de Software especializado en React y Node.js. Construyendo sistemas escalables y arquitecturas limpias." />
+    <title>Rafael Marin | Software Engineer</title>
+    <meta name="description" content="Portafolio técnico de Rafael Marin. Ingeniero de Software especializado en React y Node.js. Construyendo sistemas escalables y arquitecturas limpias." />
     <meta name="keywords" content="Software Engineer, React, Node.js, TypeScript, Desarrollador Web, Fullstack" />
-    <meta name="author" content="Tu Nombre" />
-    
+    <meta name="author" content="Rafael Marin" />
+    <link rel="canonical" href="https://rafaelmarin.dev/" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tu-dominio.com/" />
-    <meta property="og:title" content="Tu Nombre | Software Engineer" />
+    <meta property="og:url" content="https://rafaelmarin.dev/" />
+    <meta property="og:title" content="Rafael Marin | Software Engineer" />
     <meta property="og:description" content="Portafolio técnico y blog sobre ingeniería de software." />
-    <meta property="og:image" content="https://tu-dominio.com/og-image.jpg" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://tu-dominio.com/" />
-    <meta property="twitter:title" content="Tu Nombre | Software Engineer" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://rafaelmarin.dev/" />
+    <meta property="twitter:title" content="Rafael Marin | Software Engineer" />
     <meta property="twitter:description" content="Portafolio técnico y blog sobre ingeniería de software." />
-    <meta property="twitter:image" content="https://tu-dominio.com/og-image.jpg" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

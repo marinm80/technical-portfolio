@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '../test/test-utils';
 import Sidebar from './Sidebar';
 import userEvent from '@testing-library/user-event';
+import { profile } from '../data/profile';
 
 describe('Sidebar Component', () => {
   const defaultProps = {
@@ -11,7 +12,7 @@ describe('Sidebar Component', () => {
 
   it('renders the user name', () => {
     render(<Sidebar {...defaultProps} />);
-    expect(screen.getByText('Tu Nombre')).toBeInTheDocument();
+    expect(screen.getByText(profile.name)).toBeInTheDocument();
   });
 
   it('renders the role', () => {
@@ -38,10 +39,10 @@ describe('Sidebar Component', () => {
     expect(screen.getByText('English')).toBeInTheDocument();
   });
 
-  it('renders social links', () => {
+  it('renders social links pointing to real profiles', () => {
     render(<Sidebar {...defaultProps} />);
-    expect(screen.getByTitle('GitHub')).toBeInTheDocument();
-    expect(screen.getByTitle('LinkedIn')).toBeInTheDocument();
+    expect(screen.getByTitle('GitHub')).toHaveAttribute('href', profile.github);
+    expect(screen.getByTitle('LinkedIn')).toHaveAttribute('href', profile.linkedin);
   });
 
   it('navigation links have correct href', () => {

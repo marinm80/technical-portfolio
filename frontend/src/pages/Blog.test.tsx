@@ -1,85 +1,89 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor } from '../test/test-utils';
-import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen } from '../test/test-utils';
 import Blog from './Blog';
+import type { WordPressPost } from '../types/wordpress';
+
+const mocks = vi.hoisted(() => ({
+  isBlogConfigured: vi.fn(),
+  getLatestPosts: vi.fn(),
+}));
+
+vi.mock('../services/wordpress', () => ({
+  isBlogConfigured: mocks.isBlogConfigured,
+  getLatestPosts: mocks.getLatestPosts,
+}));
+
+const samplePosts: WordPressPost[] = [
+  {
+    id: 1,
+    slug: 'primer-post',
+    link: 'https://blog.example.com/primer-post',
+    date: '2026-06-01T10:00:00',
+    title: { rendered: 'Primer post del blog' },
+    excerpt: { rendered: '<p>Un resumen con <strong>HTML</strong> embebido.</p>' },
+  },
+  {
+    id: 2,
+    slug: 'segundo-post',
+    link: 'https://blog.example.com/segundo-post',
+    date: '2026-05-15T09:00:00',
+    title: { rendered: 'Segundo post' },
+    excerpt: { rendered: '<p>Otro resumen.</p>' },
+  },
+];
 
 describe('Blog Page', () => {
-  it('renders the page title', () => {
-    render(<Blog />);
-    expect(screen.getByText('Escritos & Artículos')).toBeInTheDocument();
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('renders the page description', () => {
+  it('renders the page title and description', () => {
+    mocks.isBlogConfigured.mockReturnValue(false);
     render(<Blog />);
+    expect(screen.getByText('Escritos & Artículos')).toBeInTheDocument();
     expect(screen.getByText(/Pensamientos sobre ingeniería de software/)).toBeInTheDocument();
   });
 
-  it('renders all article titles', () => {
+  it('shows the honest empty state when the blog is not configured', () => {
+    mocks.isBlogConfigured.mockReturnValue(false);
     render(<Blog />);
-    expect(screen.getByText('Understanding React Server Components')).toBeInTheDocument();
-    expect(screen.getByText('Defensive Programming in TypeScript')).toBeInTheDocument();
-    expect(screen.getByText('Micro-frontends with Module Federation')).toBeInTheDocument();
+    expect(screen.getByText('Próximamente')).toBeInTheDocument();
+    expect(mocks.getLatestPosts).not.toHaveBeenCalled();
   });
 
-  it('renders article metadata (date and reading time)', () => {
+  it('shows a loading state while fetching posts', () => {
+    mocks.isBlogConfigured.mockReturnValue(true);
+    mocks.getLatestPosts.mockReturnValue(new Promise(() => {}));
     render(<Blog />);
-    expect(screen.getByText(/May 15, 2026/)).toBeInTheDocument();
-    expect(screen.getByText(/5 min read/)).toBeInTheDocument();
-    expect(screen.getByText(/12 min read/)).toBeInTheDocument();
+    expect(screen.getByText('Cargando artículos...')).toBeInTheDocument();
   });
 
-  it('renders article summaries', () => {
+  it('renders posts with sanitized HTML and external links', async () => {
+    mocks.isBlogConfigured.mockReturnValue(true);
+    mocks.getLatestPosts.mockResolvedValue(samplePosts);
     render(<Blog />);
-    expect(screen.getByText(/deep dive into how Server Components/)).toBeInTheDocument();
-    expect(screen.getByText(/avoiding 'any' isn't enough/)).toBeInTheDocument();
+
+    expect(await screen.findByText('Primer post del blog')).toBeInTheDocument();
+    // El HTML del excerpt se elimina, queda solo texto
+    expect(screen.getByText('Un resumen con HTML embebido.')).toBeInTheDocument();
+
+    const readLinks = screen.getAllByText('Leer artículo');
+    expect(readLinks).toHaveLength(2);
+    expect(readLinks[0]!.closest('a')).toHaveAttribute('href', samplePosts[0]!.link);
+    expect(readLinks[0]!.closest('a')).toHaveAttribute('target', '_blank');
   });
 
-  it('does not show article content by default', () => {
+  it('shows the empty state when the API returns no posts', async () => {
+    mocks.isBlogConfigured.mockReturnValue(true);
+    mocks.getLatestPosts.mockResolvedValue([]);
     render(<Blog />);
-    expect(screen.queryByText(/React Server Components \(RSC\)/)).not.toBeInTheDocument();
+    expect(await screen.findByText('Próximamente')).toBeInTheDocument();
   });
 
-  it('expands article content when "Leer artículo" is clicked', async () => {
-    const user = userEvent.setup();
+  it('shows an error state when the API fails', async () => {
+    mocks.isBlogConfigured.mockReturnValue(true);
+    mocks.getLatestPosts.mockRejectedValue(new Error('network down'));
     render(<Blog />);
-
-    const readButtons = screen.getAllByText('Leer artículo');
-    await user.click(readButtons[0]);
-
-    expect(screen.getByText(/React Server Components \(RSC\) representan/)).toBeInTheDocument();
-  });
-
-  it('shows "Cerrar artículo" button after expanding', async () => {
-    const user = userEvent.setup();
-    render(<Blog />);
-
-    const readButtons = screen.getAllByText('Leer artículo');
-    await user.click(readButtons[0]);
-
-    expect(screen.getByText('Cerrar artículo')).toBeInTheDocument();
-  });
-
-  it('toggles back to "Leer artículo" after collapsing', async () => {
-    const user = userEvent.setup();
-    render(<Blog />);
-
-    // Expand first
-    const readButtons = screen.getAllByText('Leer artículo');
-    await user.click(readButtons[0]);
-
-    // Collapse
-    const closeButton = screen.getByText('Cerrar artículo');
-    await user.click(closeButton);
-
-    // Button should toggle back
-    await waitFor(() => {
-      expect(screen.getAllByText('Leer artículo')).toHaveLength(3);
-    });
-  });
-
-  it('renders the correct number of articles', () => {
-    render(<Blog />);
-    const readButtons = screen.getAllByText('Leer artículo');
-    expect(readButtons).toHaveLength(3);
+    expect(await screen.findByText(/No se pudieron cargar los artículos/)).toBeInTheDocument();
   });
 });

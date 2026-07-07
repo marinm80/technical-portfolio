@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '../test/test-utils';
 import Projects from './Projects';
+import { projects } from '../data/projects';
 
 describe('Projects Page', () => {
   it('renders the page title', () => {
@@ -13,44 +14,43 @@ describe('Projects Page', () => {
     expect(screen.getByText(/selección de sistemas y aplicaciones/)).toBeInTheDocument();
   });
 
-  it('renders all project cards', () => {
+  it('renders a card per project in the data file', () => {
     render(<Projects />);
-    expect(screen.getByText('E-commerce Microservices')).toBeInTheDocument();
-    expect(screen.getByText('Analytics Dashboard')).toBeInTheDocument();
-    expect(screen.getByText('Auth Gateway')).toBeInTheDocument();
+    for (const project of projects) {
+      expect(screen.getByText(project.title)).toBeInTheDocument();
+    }
   });
 
-  it('renders project descriptions', () => {
+  it('renders technology tags', () => {
     render(<Projects />);
-    expect(screen.getByText(/arquitectura de microservicios/)).toBeInTheDocument();
-    expect(screen.getByText(/Panel de control en tiempo real/)).toBeInTheDocument();
-    expect(screen.getByText(/autenticación centralizado/)).toBeInTheDocument();
-  });
-
-  it('renders technology tags for each project', () => {
-    render(<Projects />);
-    // E-commerce tags
-    expect(screen.getByText('Docker')).toBeInTheDocument();
-    expect(screen.getByText('RabbitMQ')).toBeInTheDocument();
-    expect(screen.getByText('Redis')).toBeInTheDocument();
-
-    // Analytics Dashboard tags
-    expect(screen.getByText('WebSockets')).toBeInTheDocument();
-
-    // Auth Gateway tags
+    expect(screen.getAllByText('Docker').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('JWT')).toBeInTheDocument();
-    expect(screen.getByText('OAuth2')).toBeInTheDocument();
+    expect(screen.getByText('PostgreSQL')).toBeInTheDocument();
   });
 
-  it('renders GitHub links with correct aria-label', () => {
+  it('renders a GitHub link only for projects with a repo', () => {
     render(<Projects />);
     const githubLinks = screen.getAllByLabelText('Código fuente');
-    expect(githubLinks).toHaveLength(3);
+    const withGithub = projects.filter((p) => p.github);
+    expect(githubLinks).toHaveLength(withGithub.length);
+    for (const link of githubLinks) {
+      expect(link.getAttribute('href')).toMatch(/^https:\/\/github\.com\//);
+    }
   });
 
-  it('renders demo links with correct aria-label', () => {
+  it('renders a live demo link only for projects with a live URL', () => {
     render(<Projects />);
     const demoLinks = screen.getAllByLabelText('Demo en vivo');
-    expect(demoLinks).toHaveLength(3);
+    const withLive = projects.filter((p) => p.live);
+    expect(demoLinks).toHaveLength(withLive.length);
+    for (const link of demoLinks) {
+      expect(link.getAttribute('href')).toMatch(/^https:\/\//);
+    }
+  });
+
+  it('never renders placeholder "#" links', () => {
+    render(<Projects />);
+    const anchors = document.querySelectorAll('a[href="#"]');
+    expect(anchors).toHaveLength(0);
   });
 });

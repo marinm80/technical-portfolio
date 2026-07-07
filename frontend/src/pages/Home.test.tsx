@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '../test/test-utils';
 import Home from './Home';
+import { profile } from '../data/profile';
 
 describe('Home Page', () => {
   it('renders the main title', () => {
@@ -38,10 +39,9 @@ describe('Home Page', () => {
     expect(screen.getByText('Stack Principal')).toBeInTheDocument();
   });
 
-  it('renders all technology tags', () => {
+  it('renders all technology tags from the profile', () => {
     render(<Home />);
-    const techs = ['TypeScript', 'React', 'Next.js', 'Node.js', 'Tailwind CSS', 'PostgreSQL', 'AWS'];
-    for (const tech of techs) {
+    for (const tech of profile.stack) {
       expect(screen.getByText(tech)).toBeInTheDocument();
     }
   });

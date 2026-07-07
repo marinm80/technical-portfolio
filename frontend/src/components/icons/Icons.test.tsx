@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '../../test/test-utils';
+import { render } from '../../test/test-utils';
 import { GithubIcon } from './GithubIcon';
 import { LinkedinIcon } from './LinkedinIcon';
 

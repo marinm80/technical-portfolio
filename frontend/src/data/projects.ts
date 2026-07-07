@@ -1,0 +1,32 @@
+import type { Project } from "../types";
+import { profile } from "./profile";
+
+// Las descripciones viven en src/locales/{es,en}.ts bajo projects.items.<id>.
+export const projects: Project[] = [
+  {
+    id: "taskManager",
+    title: "Task Manager API",
+    tags: ["Node.js", "Express", "JWT", "Docker"],
+    github: "https://github.com/marinm80/task-manager-jwt",
+    // TODO(rafael): enlazar demo en vivo cuando esté desplegada públicamente.
+  },
+  {
+    id: "portfolio",
+    title: "Technical Portfolio",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    github: "https://github.com/marinm80/technical-portfolio",
+    live: profile.domain,
+  },
+  {
+    id: "omDistribution",
+    title: "OM Distribution",
+    tags: ["TypeScript", "PostgreSQL", "Docker"],
+    github: "https://github.com/marinm80/om_distribution",
+  },
+  {
+    id: "composeFeatures",
+    title: "Self-hosted Infra Stack",
+    tags: ["Docker Compose", "Nginx", "Portainer"],
+    github: "https://github.com/marinm80/compose_features",
+  },
+];

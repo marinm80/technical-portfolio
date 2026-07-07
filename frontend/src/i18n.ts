@@ -1,48 +1,27 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-
-const resources = {
-  en: {
-    translation: {
-      "nav.overview": "Overview",
-      "nav.experience": "Experience",
-      "nav.projects": "Projects",
-      "nav.blog": "Writing",
-      "nav.contact": "Contact",
-      "home.title": "Software Engineer",
-      "home.subtitle": "specialized in React & Node.js",
-      "home.bio": "I transform complex problems into scalable and efficient systems. Focused on code quality, clean architectures, and exceptional user experiences.",
-      "home.viewExp": "View Experience",
-      "home.linkedin": "LinkedIn",
-      "home.stack": "Main Stack"
-    }
-  },
-  es: {
-    translation: {
-      "nav.overview": "Resumen",
-      "nav.experience": "Experiencia",
-      "nav.projects": "Proyectos",
-      "nav.blog": "Artículos",
-      "nav.contact": "Contacto",
-      "home.title": "Ingeniero de Software",
-      "home.subtitle": "especializado en React y Node.js",
-      "home.bio": "Transformo problemas complejos en sistemas escalables y eficientes. Enfocado en la calidad del código, arquitecturas limpias y experiencias de usuario excepcionales.",
-      "home.viewExp": "Ver Experiencia",
-      "home.linkedin": "LinkedIn",
-      "home.stack": "Stack Principal"
-    }
-  }
-};
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import es from "./locales/es";
+import en from "./locales/en";
 
 i18n
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources,
-    lng: 'es', // default language
-    fallbackLng: 'en',
+    resources: {
+      es: { translation: es },
+      en: { translation: en },
+    },
+    fallbackLng: "es",
+    supportedLngs: ["es", "en"],
+    nonExplicitSupportedLngs: true, // "es-MX" → "es", "en-US" → "en"
+    detection: {
+      order: ["localStorage", "navigator"],
+      caches: ["localStorage"],
+    },
     interpolation: {
-      escapeValue: false 
-    }
+      escapeValue: false,
+    },
   });
 
 export default i18n;
