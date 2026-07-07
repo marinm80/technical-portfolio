@@ -20,3 +20,16 @@ services:
     restart: unless-stopped
     expose:
       - "80"
+    networks:
+      - rafael-network
+
+networks:
+  # Red compartida del ecosistema rafaelmarin.dev: este stack la crea (nombre
+  # fijo, sin prefijo de proyecto) y otros stacks de la misma red (p. ej. el
+  # blog WordPress) la declaran así:
+  #
+  #   networks:
+  #     rafael-network:
+  #       external: true
+  rafael-network:
+    name: rafael-network
