@@ -66,7 +66,7 @@ const es = {
       },
       omDistribution: {
         description:
-          "Plataforma web para una distribuidora de alimentos en EE. UU.: landing page y gestión interna sobre TypeScript y PostgreSQL, contenedorizada con Docker.",
+          "Plataforma web para una distribuidora de alimentos en EE. UU.: landing page y gestión interna sobre TypeScript y MySQL, contenedorizada con Docker.",
       },
       SG_Remesas: {
         description:

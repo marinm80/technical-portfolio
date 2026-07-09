@@ -20,7 +20,7 @@ export const projects: Project[] = [
   {
     id: "omDistribution",
     title: "OM Distribution",
-    tags: ["TypeScript", "PostgreSQL", "Docker"],
+    tags: ["TypeScript", "MySQL", "Docker"],
     github: "https://github.com/marinm80/om_distribution",
   },
   {

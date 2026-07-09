@@ -71,7 +71,7 @@ const en = {
       },
       omDistribution: {
         description:
-          "Web platform for a food distribution company in the US: landing page and internal management built on TypeScript and PostgreSQL, containerized with Docker.",
+          "Web platform for a food distribution company in the US: landing page and internal management built on TypeScript and MySQL, containerized with Docker.",
       },
       SG_Remesas: {
         description:
