@@ -54,8 +54,7 @@ const es = {
   projects: {
     title: "Proyectos Destacados",
     subtitle: "Una selección de sistemas y aplicaciones que he construido.",
-    sourceLabel: "Código fuente",
-    demoLabel: "Demo en vivo",
+    viewProject: "Ver Proyecto",
     items: {
       taskManager: {
         description:

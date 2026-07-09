@@ -25,32 +25,43 @@ export default function Projects() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project) => (
           <div key={project.id} className="flex flex-col bg-surface-alt border border-edge p-6 rounded-xl transition-colors hover:border-content-muted/40">
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="font-semibold text-lg text-content-strong">{project.title}</h3>
-              <div className="flex gap-2">
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noreferrer" className="text-content-muted hover:text-content-strong transition-colors" aria-label={t('projects.sourceLabel')}>
-                    <GithubIcon className="w-5 h-5" />
-                  </a>
-                )}
-                {project.live && (
-                  <a href={project.live} target="_blank" rel="noreferrer" className="text-content-muted hover:text-content-strong transition-colors" aria-label={t('projects.demoLabel')}>
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                )}
-              </div>
-            </div>
+            <h3 className="font-semibold text-lg text-content-strong mb-4">{project.title}</h3>
 
             <p className="text-content-muted text-sm mb-6 flex-1">
               {t(`projects.items.${project.id}.description`)}
             </p>
 
-            <div className="flex flex-wrap gap-2 mt-auto">
+            <div className="flex flex-wrap gap-2 mb-5">
               {project.tags.map(tag => (
                 <span key={tag} className="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded">
                   {tag}
                 </span>
               ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3 mt-auto">
+              {(project.live ?? project.github) && (
+                <a
+                  href={project.live ?? project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium bg-accent text-surface px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors"
+                >
+                  {t('projects.viewProject')}
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium border border-edge px-4 py-2 rounded-lg text-content-strong hover:border-accent hover:text-accent transition-colors"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  GitHub
+                </a>
+              )}
             </div>
           </div>
         ))}

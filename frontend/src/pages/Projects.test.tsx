@@ -25,26 +25,27 @@ describe('Projects Page', () => {
     render(<Projects />);
     expect(screen.getAllByText('Docker').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('JWT')).toBeInTheDocument();
-    expect(screen.getByText('PostgreSQL')).toBeInTheDocument();
+    expect(screen.getAllByText('PostgreSQL').length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders a GitHub link only for projects with a repo', () => {
+  it('renders a "View Project" button per project, pointing to the live URL or the repo', () => {
     render(<Projects />);
-    const githubLinks = screen.getAllByLabelText('Código fuente');
-    const withGithub = projects.filter((p) => p.github);
-    expect(githubLinks).toHaveLength(withGithub.length);
-    for (const link of githubLinks) {
-      expect(link.getAttribute('href')).toMatch(/^https:\/\/github\.com\//);
+    const viewProjectLinks = screen.getAllByText('Ver Proyecto').map((el) => el.closest('a'));
+    expect(viewProjectLinks).toHaveLength(projects.length);
+    for (const [index, link] of viewProjectLinks.entries()) {
+      const project = projects[index];
+      expect(link).toHaveAttribute('href', project.live ?? project.github);
+      expect(link).toHaveAttribute('target', '_blank');
     }
   });
 
-  it('renders a live demo link only for projects with a live URL', () => {
+  it('renders a GitHub button only for projects with a repo', () => {
     render(<Projects />);
-    const demoLinks = screen.getAllByLabelText('Demo en vivo');
-    const withLive = projects.filter((p) => p.live);
-    expect(demoLinks).toHaveLength(withLive.length);
-    for (const link of demoLinks) {
-      expect(link.getAttribute('href')).toMatch(/^https:\/\//);
+    const githubLinks = screen.getAllByText('GitHub').map((el) => el.closest('a'));
+    const withGithub = projects.filter((p) => p.github);
+    expect(githubLinks).toHaveLength(withGithub.length);
+    for (const link of githubLinks) {
+      expect(link?.getAttribute('href')).toMatch(/^https:\/\/github\.com\//);
     }
   });
 

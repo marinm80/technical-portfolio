@@ -59,8 +59,7 @@ const en = {
   projects: {
     title: "Featured Projects",
     subtitle: "A selection of systems and applications I have built.",
-    sourceLabel: "Source code",
-    demoLabel: "Live demo",
+    viewProject: "View Project",
     items: {
       taskManager: {
         description:
