@@ -24,9 +24,9 @@ export const projects: Project[] = [
     github: "https://github.com/marinm80/om_distribution",
   },
   {
-    id: "composeFeatures",
-    title: "Self-hosted Infra Stack",
-    tags: ["Docker Compose", "Nginx", "Portainer"],
-    github: "https://github.com/marinm80/compose_features",
+    id: "SG_Remesas",
+    title: "SG-Remesas",
+    tags: ["React", "Node.js", "Express", "PostgreSQL", "Docker"],
+    github: "https://github.com/marinm80/sg-remesas",
   },
 ];

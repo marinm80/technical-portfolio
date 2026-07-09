@@ -69,9 +69,9 @@ const es = {
         description:
           "Plataforma web para una distribuidora de alimentos en EE. UU.: landing page y gestión interna sobre TypeScript y PostgreSQL, contenedorizada con Docker.",
       },
-      composeFeatures: {
+      SG_Remesas: {
         description:
-          "Stack de infraestructura self-hosted con Docker Compose: nginx-proxy, Portainer, Uptime Kuma y Watchtower para gestión, monitoreo y despliegue automático.",
+          "Plataforma full-stack para gestionar remesas, clientes, cuentas y beneficiarios: paneles por rol, autenticación JWT con permisos RBAC, verificación KYC y alertas AML. Construida con React, Node.js, Express, PostgreSQL y Docker.",
       },
     },
   },
