@@ -56,7 +56,7 @@ export default function Contact() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
-      <Seo title={t('meta.contact.title')} description={t('meta.contact.description')} />
+      <Seo title={t('meta.contact.title')} description={t('meta.contact.description')} canonicalPath="/contact" />
 
       <div>
         <h1 className="text-3xl font-bold mb-2">{t('contact.title')}</h1>

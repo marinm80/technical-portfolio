@@ -86,7 +86,7 @@ export default function Blog() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
-      <Seo title={t('meta.blog.title')} description={t('meta.blog.description')} />
+      <Seo title={t('meta.blog.title')} description={t('meta.blog.description')} canonicalPath="/blog" />
 
       <div>
         <h1 className="text-3xl font-bold mb-2">{t('blog.title')}</h1>

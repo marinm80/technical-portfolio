@@ -74,7 +74,7 @@ export default function Experience() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
-      <Seo title={t('meta.experience.title')} description={t('meta.experience.description')} />
+      <Seo title={t('meta.experience.title')} description={t('meta.experience.description')} canonicalPath="/experience" />
 
       <div>
         <h1 className="text-3xl font-bold mb-2">{t('experience.title')}</h1>

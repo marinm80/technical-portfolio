@@ -16,7 +16,7 @@ export default function Home() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
-      <Seo title={t('meta.home.title')} description={t('meta.home.description')} />
+      <Seo title={t('meta.home.title')} description={t('meta.home.description')} canonicalPath="/" />
 
       <section className="space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">

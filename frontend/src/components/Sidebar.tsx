@@ -82,10 +82,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         <div className="p-4 border-t border-edge flex flex-col gap-2">
           <div className="flex gap-4 px-4 py-2 mb-2">
-            <a href={profile.github} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="GitHub">
+            <a href={profile.github} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="GitHub" aria-label="GitHub">
               <GithubIcon className="w-5 h-5" />
             </a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="LinkedIn">
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-content-muted hover:text-accent transition-colors" title="LinkedIn" aria-label="LinkedIn">
               <LinkedinIcon className="w-5 h-5" />
             </a>
           </div>

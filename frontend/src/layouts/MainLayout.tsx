@@ -2,6 +2,7 @@ import { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Sidebar from "../components/Sidebar";
+import PersonJsonLd from "../components/PersonJsonLd";
 import { profile } from "../data/profile";
 
 function PageFallback() {
@@ -19,6 +20,8 @@ export default function MainLayout() {
 
   return (
     <div className="flex min-h-screen bg-surface text-content">
+      <PersonJsonLd />
+
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-surface-alt/80 backdrop-blur-md border-b border-edge z-20 flex items-center px-4">
         <button

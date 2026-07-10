@@ -15,7 +15,7 @@ export default function Projects() {
       transition={{ duration: 0.4 }}
       className="space-y-12"
     >
-      <Seo title={t('meta.projects.title')} description={t('meta.projects.description')} />
+      <Seo title={t('meta.projects.title')} description={t('meta.projects.description')} canonicalPath="/projects" />
 
       <div>
         <h1 className="text-3xl font-bold mb-2">{t('projects.title')}</h1>
