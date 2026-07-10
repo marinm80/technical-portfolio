@@ -11,9 +11,9 @@ const es = {
     themeDark: "Modo oscuro",
   },
   home: {
-    title: "Ingeniero de Software",
+    title: "Desarrollador de Software",
     subtitle: "especializado en React y Node.js",
-    bio: "Transformo problemas complejos en sistemas escalables y eficientes. Enfocado en la calidad del código, arquitecturas limpias y experiencias de usuario excepcionales.",
+    bio: "Transformo problemas complejos en sistemas escalables y eficientes, con conocimientos sólidos de Docker y Linux para desplegar y operar lo que construyo. Enfocado en la calidad del código y en arquitecturas limpias.",
     viewExp: "Ver Experiencia",
     viewProjects: "Ver Proyectos",
     linkedin: "LinkedIn",
@@ -119,7 +119,7 @@ const es = {
     home: {
       title: "Rafael Marin | Software Engineer",
       description:
-        "Portafolio técnico de Rafael Marin, Ingeniero de Software especializado en React y Node.js.",
+        "Portafolio técnico de Rafael Marin, Desarrollador de Software especializado en React y Node.js.",
     },
     experience: {
       title: "Experiencia | Rafael Marin",

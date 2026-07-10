@@ -18,7 +18,7 @@ const en = {
   home: {
     title: "Software Engineer",
     subtitle: "specialized in React & Node.js",
-    bio: "I transform complex problems into scalable and efficient systems. Focused on code quality, clean architectures, and exceptional user experiences.",
+    bio: "I transform complex problems into scalable and efficient systems, with solid Docker and Linux skills to deploy and operate what I build. Focused on code quality and clean architectures.",
     viewExp: "View Experience",
     viewProjects: "View Projects",
     linkedin: "LinkedIn",

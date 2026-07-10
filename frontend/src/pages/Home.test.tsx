@@ -7,7 +7,7 @@ describe('Home Page', () => {
   it('renders the main title', () => {
     render(<Home />);
     // Default language is 'es', so we expect Spanish text
-    expect(screen.getByText('Ingeniero de Software')).toBeInTheDocument();
+    expect(screen.getByText('Desarrollador de Software')).toBeInTheDocument();
   });
 
   it('renders the subtitle', () => {
