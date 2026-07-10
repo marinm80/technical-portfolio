@@ -26,8 +26,12 @@
   --edge: #e2e8f0;
   --content: #334155;
   --content-strong: #0f172a;
-  --content-muted: #64748b;
-  --accent: #0284c7;
+  /* content-muted y accent: un tono más oscuro que los valores originales
+     (#64748b / #0284c7) porque sobre fondo blanco no llegaban al mínimo de
+     contraste WCAG AA (4.76:1 y 4.1:1 respectivamente); ahora dan ~7.6:1 y
+     ~5.9:1 sin cambiar la identidad visual. */
+  --content-muted: #475569;
+  --accent: #0369a1;
 }
 
 .dark {
