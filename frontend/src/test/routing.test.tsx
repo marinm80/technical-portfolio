@@ -25,12 +25,12 @@ function renderWithRoute(route: string) {
 describe('App Routing', () => {
   it('renders Home page on "/" route', async () => {
     renderWithRoute('/');
-    expect(await screen.findByText('Desarrollador de Software', {}, { timeout: 3000 })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Full Stack Developer/ }, { timeout: 3000 })).toBeInTheDocument();
   });
 
   it('redirects the hidden "/experience" route to Home', async () => {
     renderWithRoute('/experience');
-    expect(await screen.findByText('Desarrollador de Software', {}, { timeout: 3000 })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Full Stack Developer/ }, { timeout: 3000 })).toBeInTheDocument();
   });
 
   it('renders Projects page on "/projects" route', async () => {
@@ -50,6 +50,6 @@ describe('App Routing', () => {
 
   it('redirects unknown routes to Home', async () => {
     renderWithRoute('/unknown-page');
-    expect(await screen.findByText('Desarrollador de Software', {}, { timeout: 3000 })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Full Stack Developer/ }, { timeout: 3000 })).toBeInTheDocument();
   });
 });

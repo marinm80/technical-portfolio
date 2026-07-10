@@ -16,7 +16,7 @@ const en = {
     themeDark: "Dark mode",
   },
   home: {
-    title: "Software Engineer",
+    title: "Full Stack Developer",
     subtitle: "specialized in React & Node.js",
     bio: "I transform complex problems into scalable and efficient systems, with solid Docker and Linux skills to deploy and operate what I build. Focused on code quality and clean architectures.",
     viewExp: "View Experience",
@@ -122,9 +122,9 @@ const en = {
   },
   meta: {
     home: {
-      title: "Rafael Marin | Software Engineer",
+      title: "Rafael Marin | Full Stack Developer",
       description:
-        "Technical portfolio of Rafael Marin, Software Engineer specialized in React and Node.js.",
+        "Technical portfolio of Rafael Marin, Full Stack Developer specialized in React and Node.js.",
     },
     experience: {
       title: "Experience | Rafael Marin",
