@@ -1,6 +1,6 @@
 export const profile = {
   name: "Rafael Marin",
-  role: "Software Engineer",
+  role: "Full Stack Developer",
   domain: "https://rafaelmarin.dev",
   email: "rafael.marin@rocanegras.com",
   github: "https://github.com/marinm80",

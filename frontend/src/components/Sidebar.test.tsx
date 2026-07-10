@@ -17,7 +17,7 @@ describe('Sidebar Component', () => {
 
   it('renders the role', () => {
     render(<Sidebar {...defaultProps} />);
-    expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Full Stack Developer')).toBeInTheDocument();
   });
 
   it('renders all navigation links (in Spanish by default)', () => {
