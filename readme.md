@@ -99,10 +99,11 @@ docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 
 ## 🗺️ Roadmap
 
-* [ ] Desplegar el blog en WordPress y configurar `VITE_WP_API_URL` (el frontend ya está listo; WP deberá permitir CORS desde `https://rafaelmarin.dev`)
 * [ ] Reactivar la sección Experiencia con la trayectoria real (hoy está oculta del nav y el router; la página, datos y traducciones quedan listos)
-* [ ] Imagen `og-image` real para las cards de redes sociales
+* [ ] Imagen `og-image` real para las cards de redes sociales (`twitter:card` está en `summary`, no `summary_large_image`, hasta que exista la imagen)
 * [ ] CV descargable en PDF
+* [ ] Decidir si vale la pena prerender/SSR: hoy es una SPA pura (sin contenido inicial en el HTML) y las rutas desconocidas devuelven HTTP 200 con redirect a Home en vez de un 404 real
+* [ ] Evaluar si conviene URLs separadas por idioma (`/en/...`) para que Google pueda indexar también la versión en inglés — hoy el toggle es 100% client-side sobre la misma URL
 
 ## 📫 Contacto
 
