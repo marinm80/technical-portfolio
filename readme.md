@@ -32,7 +32,7 @@ Portfolio profesional de **Rafael Marin**, en producción en **[rafaelmarin.dev]
 | i18n | i18next + react-i18next + browser-languagedetector |
 | Testing | Vitest + React Testing Library + jsdom |
 | CI/CD | GitHub Actions (lint → type-check → test → build) |
-| Deploy | Docker multi-stage → Nginx → Nginx Proxy Manager (VPS) |
+| Deploy | Dockerfile multi-stage → Nginx → Traefik/Coolify (VPS) |
 
 ## 📁 Estructura
 
@@ -87,12 +87,16 @@ Cubre: validación del formulario (edge cases), interacción de toggles (idioma 
 
 **CI** (GitHub Actions, Node 22): `npm ci` → ESLint → `tsc -b` → `npm test` → `vite build`.
 
-**Deploy**: Docker Compose con imagen multi-stage ([frontend/Dockerfile](frontend/Dockerfile): build con Node 22 → runtime `nginx:alpine`), desplegado en un VPS con **Coolify** (Build Pack: *Docker Compose*, location `/docker-compose.yml`). Coolify termina el TLS y enruta el dominio hacia el puerto 80 del contenedor; las `VITE_*` se definen como Environment Variables en Coolify y se interpolan como build args. El nginx interno sirve la SPA con gzip, headers de seguridad (CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) y cache inmutable para los assets con hash.
+**Deploy**: sitio estático empaquetado por [frontend/Dockerfile](frontend/Dockerfile) con build multi-stage (Node 22 → `nginx:alpine`). En **Coolify** se configura como aplicación con Build Pack **Dockerfile**, Base Directory `/frontend`, Dockerfile Location `/Dockerfile` y puerto `80`. El portfolio se ejecuta como un único contenedor aislado; el blog se consume mediante su API pública HTTPS.
+
+Las variables `VITE_*` se crean en Coolify como **Environment Variables** y se marcan también como **Build Variable**, porque Vite las inyecta al compilar. Coolify termina TLS con Traefik y enruta `rafaelmarin.dev` y `www.rafaelmarin.dev` al puerto 80. El Nginx interno conserva el fallback de SPA, gzip, headers de seguridad y caché inmutable para assets con hash.
 
 ```bash
-# Prueba local (publica el puerto 8080 del host):
-cp .env.example .env   # completar las VITE_*
-docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+# Build local de la imagen estática
+docker build -t technical-portfolio ./frontend
+
+# Prueba local en http://localhost:8080
+docker run --rm -p 8080:80 technical-portfolio
 ```
 
 > Las `VITE_*` se inyectan en **build time**: tras cambiarlas (en Coolify o en `.env`) hay que reconstruir/redesplegar.
