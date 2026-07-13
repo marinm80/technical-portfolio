@@ -1,7 +1,7 @@
 {
   "slug": "static-coolify-deploy",
   "title": "Static Coolify deploy",
-  "phase": "implementation",
+  "phase": "done",
   "stack_hints": {
     "frontend": "React 19, Vite 8, Nginx",
     "backend": null,
@@ -15,9 +15,10 @@
     "data_model": true,
     "architecture_plan": true
   },
-  "current_task": "T-003",
+  "current_task": null,
   "completed_tasks": [
     "T-001",
-    "T-002"
+    "T-002",
+    "T-003"
   ]
 }

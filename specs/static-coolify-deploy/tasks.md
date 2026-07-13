@@ -37,4 +37,4 @@
 - GREEN: Dockerfile deployment is healthy and public smoke test returns 200
 - REFACTOR: remove or stop obsolete Compose resource after successful cutover
 - Verification: `curl -fsSI https://rafaelmarin.dev/`
-- Done: pending
+- Done: Coolify resource migrated to Dockerfile, deployment `ao5xm6vnoj3o0eyat0cdcdcu` finished healthy, and `/`, `/projects`, `/blog`, and `www` returned HTTP 200
