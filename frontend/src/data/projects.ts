@@ -8,7 +8,7 @@ export const projects: Project[] = [
     title: "Task Manager API",
     tags: ["Node.js", "Express", "JWT", "Docker"],
     github: "https://github.com/marinm80/task-manager-jwt",
-    // TODO(rafael): enlazar demo en vivo cuando esté desplegada públicamente.
+    live: "https://task.rafaelmarin.dev",
   },
   {
     id: "portfolio",
