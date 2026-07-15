@@ -1,26 +1,20 @@
 import type { Project } from "../types";
-import { profile } from "./profile";
 
 // Las descripciones viven en src/locales/{es,en}.ts bajo projects.items.<id>.
+// Los proyectos PERN (Taskly, SG-Remesas, OM Distribution) comparten un set
+// de tags estándar: React, Node.js, Express, la base de datos, Docker.
 export const projects: Project[] = [
   {
     id: "taskManager",
-    title: "Task Manager API",
-    tags: ["Node.js", "Express", "JWT", "Docker"],
+    title: "Taskly",
+    tags: ["React", "Node.js", "Express", "PostgreSQL", "Docker"],
     github: "https://github.com/marinm80/task-manager-jwt",
-    live: "https://task.rafaelmarin.dev",
-  },
-  {
-    id: "portfolio",
-    title: "Technical Portfolio",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    github: "https://github.com/marinm80/technical-portfolio",
-    live: profile.domain,
+    live: "https://taskly.rafaelmarin.dev",
   },
   {
     id: "omDistribution",
     title: "OM Distribution",
-    tags: ["TypeScript", "MySQL", "Docker"],
+    tags: ["React", "Node.js", "Express", "MySQL", "Docker"],
     github: "https://github.com/marinm80/om_distribution",
     live: "https://omdistribution.rafaelmarin.dev/",
   },

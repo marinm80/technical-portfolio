@@ -63,15 +63,11 @@ const en = {
     items: {
       taskManager: {
         description:
-          "Task management REST API with JWT authentication, rate limiting, health endpoint and password recovery. Deployed with Docker behind Nginx Proxy Manager.",
-      },
-      portfolio: {
-        description:
-          "This very site: a React 19 SPA with strict TypeScript, Tailwind CSS 4, i18n (es/en), Vitest tests and GitHub Actions CI/CD to a VPS.",
+          "Taskly: a task management SaaS with JWT authentication, a dashboard with filters and metrics, CSV export and password recovery. Built with React, Node.js, Express, PostgreSQL and Docker.",
       },
       omDistribution: {
         description:
-          "Web platform for a food distribution company in the US: landing page and internal management built on TypeScript and MySQL, containerized with Docker.",
+          "Web platform for a food distribution company in the US: public landing page and internal inventory management. Built with React, Node.js, Express, MySQL and Docker.",
       },
       SG_Remesas: {
         description:

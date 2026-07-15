@@ -24,7 +24,8 @@ describe('Projects Page', () => {
   it('renders technology tags', () => {
     render(<Projects />);
     expect(screen.getAllByText('Docker').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText('JWT')).toBeInTheDocument();
+    expect(screen.getAllByText('React').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Express').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('PostgreSQL').length).toBeGreaterThanOrEqual(1);
   });
 
