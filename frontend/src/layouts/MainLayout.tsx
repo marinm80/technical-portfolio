@@ -4,6 +4,7 @@ import { Menu } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import PersonJsonLd from "../components/PersonJsonLd";
 import { profile } from "../data/profile";
+import { useTheme } from "../context/ThemeContext";
 
 function PageFallback() {
   return (
@@ -17,10 +18,22 @@ function PageFallback() {
 
 export default function MainLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   return (
     <div className="flex min-h-screen bg-surface text-content">
       <PersonJsonLd />
+
+      {/* Marca de agua del logo: fija (no se mueve con el scroll), detrás de
+          todo el contenido en cualquier página. La Sidebar (bg opaco, z-40)
+          la tapa naturalmente en la columna izquierda, sin necesidad de
+          esquivarla manualmente. */}
+      <img
+        src={theme === 'dark' ? '/brand/logo-dark.png' : '/brand/logo-light.png'}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none fixed right-0 top-1/2 z-0 hidden w-[34rem] -translate-y-1/2 opacity-[0.05] md:block"
+      />
 
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-surface-alt/80 backdrop-blur-md border-b border-edge z-20 flex items-center px-4">
@@ -36,7 +49,7 @@ export default function MainLayout() {
 
       <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-      <main className="flex-1 ml-0 md:ml-64 p-8 pt-24 md:p-16 md:pt-16 overflow-y-auto">
+      <main className="relative z-10 flex-1 ml-0 md:ml-64 p-8 pt-24 md:p-16 md:pt-16 overflow-y-auto">
         <div className="max-w-3xl mx-auto">
           <Suspense fallback={<PageFallback />}>
             <Outlet />
