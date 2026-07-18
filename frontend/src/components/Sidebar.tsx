@@ -44,11 +44,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6 pb-4 flex justify-between items-start">
-          <div className="flex items-center gap-2.5 min-w-0">
+          <div className="flex items-center gap-3 min-w-0">
             <img
               src={theme === 'dark' ? '/brand/logo-dark.png' : '/brand/logo-light.png'}
               alt=""
-              className="w-9 h-9 shrink-0 object-contain"
+              className="w-12 h-12 shrink-0 object-contain"
             />
             <div className="min-w-0">
               <h1 className="text-sm font-bold text-content-strong tracking-tight leading-tight">{profile.name}</h1>
