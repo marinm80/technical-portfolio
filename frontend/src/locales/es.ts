@@ -113,25 +113,25 @@ const es = {
   },
   meta: {
     home: {
-      title: "Rafael Marin | Full Stack Developer",
+      title: "Euclides Rafael Marin | Full Stack Developer",
       description:
-        "Portafolio técnico de Rafael Marin, Full Stack Developer especializado en React y Node.js.",
+        "Portafolio técnico de Euclides Rafael Marin, Full Stack Developer especializado en React y Node.js.",
     },
     experience: {
-      title: "Experiencia | Rafael Marin",
-      description: "Trayectoria profesional y logros técnicos de Rafael Marin.",
+      title: "Experiencia | Euclides Rafael Marin",
+      description: "Trayectoria profesional y logros técnicos de Euclides Rafael Marin.",
     },
     projects: {
-      title: "Proyectos | Rafael Marin",
-      description: "Proyectos y sistemas construidos por Rafael Marin.",
+      title: "Proyectos | Euclides Rafael Marin",
+      description: "Proyectos y sistemas construidos por Euclides Rafael Marin.",
     },
     blog: {
-      title: "Artículos | Rafael Marin",
+      title: "Artículos | Euclides Rafael Marin",
       description: "Artículos sobre ingeniería de software, arquitectura y desarrollo web.",
     },
     contact: {
-      title: "Contacto | Rafael Marin",
-      description: "Ponte en contacto con Rafael Marin para proyectos u oportunidades.",
+      title: "Contacto | Euclides Rafael Marin",
+      description: "Ponte en contacto con Euclides Rafael Marin para proyectos u oportunidades.",
     },
   },
 };

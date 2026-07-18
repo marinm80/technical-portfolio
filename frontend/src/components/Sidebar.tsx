@@ -43,10 +43,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         "fixed inset-y-0 left-0 w-64 bg-surface-alt border-r border-edge flex flex-col z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="p-8 pb-4 flex justify-between items-start">
-          <div>
-            <h1 className="text-xl font-bold text-content-strong tracking-tight">{profile.name}</h1>
-            <p className="text-sm text-accent mt-1 font-mono">{profile.role}</p>
+        <div className="p-6 pb-4 flex justify-between items-start">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img
+              src={theme === 'dark' ? '/brand/logo-dark.png' : '/brand/logo-light.png'}
+              alt=""
+              className="w-9 h-9 shrink-0 object-contain"
+            />
+            <div className="min-w-0">
+              <h1 className="text-sm font-bold text-content-strong tracking-tight leading-tight">{profile.name}</h1>
+              <p className="text-xs text-accent mt-0.5 font-mono">{profile.role}</p>
+            </div>
           </div>
           <button
             onClick={onClose}

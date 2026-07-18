@@ -118,25 +118,25 @@ const en = {
   },
   meta: {
     home: {
-      title: "Rafael Marin | Full Stack Developer",
+      title: "Euclides Rafael Marin | Full Stack Developer",
       description:
-        "Technical portfolio of Rafael Marin, Full Stack Developer specialized in React and Node.js.",
+        "Technical portfolio of Euclides Rafael Marin, Full Stack Developer specialized in React and Node.js.",
     },
     experience: {
-      title: "Experience | Rafael Marin",
-      description: "Professional journey and technical achievements of Rafael Marin.",
+      title: "Experience | Euclides Rafael Marin",
+      description: "Professional journey and technical achievements of Euclides Rafael Marin.",
     },
     projects: {
-      title: "Projects | Rafael Marin",
-      description: "Projects and systems built by Rafael Marin.",
+      title: "Projects | Euclides Rafael Marin",
+      description: "Projects and systems built by Euclides Rafael Marin.",
     },
     blog: {
-      title: "Writing | Rafael Marin",
+      title: "Writing | Euclides Rafael Marin",
       description: "Articles on software engineering, architecture and web development.",
     },
     contact: {
-      title: "Contact | Rafael Marin",
-      description: "Get in touch with Rafael Marin for projects or opportunities.",
+      title: "Contact | Euclides Rafael Marin",
+      description: "Get in touch with Euclides Rafael Marin for projects or opportunities.",
     },
   },
 } satisfies TranslationSchema;

@@ -1,5 +1,5 @@
 export const profile = {
-  name: "Rafael Marin",
+  name: "Euclides Rafael Marin",
   role: "Full Stack Developer",
   domain: "https://rafaelmarin.dev",
   email: "rafael.marin@rocanegras.com",
