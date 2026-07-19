@@ -18,9 +18,12 @@ const wpTagsSchema = z.array(wpTagSchema);
 const wpPostWithTagsSchema = wpPostSchema.extend({ tags: z.array(z.number()) });
 const wpPostsWithTagsSchema = z.array(wpPostWithTagsSchema);
 
+// URL pública del blog propio; VITE_WP_API_URL la sobreescribe (p. ej. en dev).
+const DEFAULT_WP_URL = "https://blog.rafaelmarin.dev";
+
 function getBaseUrl(): string | undefined {
-  const url = import.meta.env.VITE_WP_API_URL as string | undefined;
-  return url ? url.replace(/\/+$/, "") : undefined;
+  const url = (import.meta.env.VITE_WP_API_URL as string | undefined) || DEFAULT_WP_URL;
+  return url.replace(/\/+$/, "");
 }
 
 export function isBlogConfigured(): boolean {

@@ -21,9 +21,9 @@ describe('wordpress service', () => {
     vi.unstubAllGlobals();
   });
 
-  it('isBlogConfigured is false without VITE_WP_API_URL', () => {
+  it('isBlogConfigured is true even without VITE_WP_API_URL (fallback URL)', () => {
     vi.stubEnv('VITE_WP_API_URL', '');
-    expect(isBlogConfigured()).toBe(false);
+    expect(isBlogConfigured()).toBe(true);
   });
 
   it('isBlogConfigured is true with VITE_WP_API_URL', () => {
@@ -31,9 +31,16 @@ describe('wordpress service', () => {
     expect(isBlogConfigured()).toBe(true);
   });
 
-  it('getLatestPosts rejects when not configured', async () => {
+  it('getLatestPosts uses the default blog URL when the env var is empty', async () => {
     vi.stubEnv('VITE_WP_API_URL', '');
-    await expect(getLatestPosts()).rejects.toThrow(/not configured/);
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => [] });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await getLatestPosts(3);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://blog.rafaelmarin.dev/wp-json/wp/v2/posts?per_page=3&_fields=id,slug,link,date,title,excerpt'
+    );
   });
 
   it('fetches and validates posts from the WP REST API', async () => {
