@@ -58,7 +58,7 @@ describe('wordpress service', () => {
     // La URL base pierde el slash final y filtra por la categoría resuelta
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
-      'https://blog.example.com/wp-json/wp/v2/posts?categories=3&per_page=5&_fields=id,slug,link,date,title,excerpt'
+      'https://blog.example.com/wp-json/wp/v2/posts?categories=3&per_page=5&_embed=wp:featuredmedia&_fields=id,slug,link,date,title,excerpt,_links,_embedded'
     );
   });
 

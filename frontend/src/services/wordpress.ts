@@ -8,7 +8,20 @@ const wpPostSchema = z.object({
   date: z.string(),
   title: z.object({ rendered: z.string() }),
   excerpt: z.object({ rendered: z.string() }),
+  _embedded: z
+    .object({
+      "wp:featuredmedia": z
+        .array(z.object({ source_url: z.string(), alt_text: z.string().optional() }))
+        .optional(),
+    })
+    .optional(),
 });
+
+/** URL de la imagen destacada embebida, si el post tiene una. */
+export function getFeaturedImage(post: WordPressPost): { url: string; alt: string } | undefined {
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  return media ? { url: media.source_url, alt: media.alt_text ?? "" } : undefined;
+}
 
 const wpPostsSchema = z.array(wpPostSchema);
 
@@ -50,7 +63,7 @@ export async function getLatestPosts(limit = 10): Promise<WordPressPost[]> {
   const categories = wpCategoriesSchema.parse(await categoryResponse.json());
   if (categories.length === 0) return [];
 
-  const url = `${base}/wp-json/wp/v2/posts?categories=${categories[0]!.id}&per_page=${limit}&_fields=id,slug,link,date,title,excerpt`;
+  const url = `${base}/wp-json/wp/v2/posts?categories=${categories[0]!.id}&per_page=${limit}&_embed=wp:featuredmedia&_fields=id,slug,link,date,title,excerpt,_links,_embedded`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`WordPress API responded with ${response.status}`);

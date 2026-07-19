@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Loader2, PenLine, TriangleAlert } from "lucide-react";
+import { ExternalLink, ImageOff, Loader2, PenLine, TriangleAlert } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Seo from "../components/Seo";
-import { getLatestPosts, isBlogConfigured } from "../services/wordpress";
+import { getFeaturedImage, getLatestPosts, isBlogConfigured } from "../services/wordpress";
 import type { WordPressPost } from "../types/wordpress";
 
 type BlogStatus = "loading" | "success" | "error" | "empty";
@@ -22,35 +22,57 @@ function formatDate(iso: string, locale: string): string {
 
 function PostCard({ post, index, locale }: { post: WordPressPost; index: number; locale: string }) {
   const { t } = useTranslation();
+  const image = getFeaturedImage(post);
 
   return (
     <motion.article
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="group block p-6 -mx-6 rounded-2xl transition-colors border border-transparent hover:bg-surface-alt"
+      className="group flex flex-col bg-surface-alt border border-edge rounded-xl overflow-hidden transition-all hover:border-content-muted/40 hover:shadow-lg"
     >
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
-        <h3 className="text-lg font-semibold text-content-strong group-hover:text-accent transition-colors">
+      <a href={post.link} target="_blank" rel="noreferrer" className="block aspect-video bg-accent/10 overflow-hidden">
+        {image ? (
+          <img
+            src={image.url}
+            alt={image.alt || stripHtml(post.title.rendered)}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          />
+        ) : (
+          <span className="w-full h-full flex items-center justify-center text-accent/50">
+            <ImageOff className="w-8 h-8" />
+          </span>
+        )}
+      </a>
+
+      <div className="flex flex-col flex-1 p-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-mono uppercase tracking-wide text-accent bg-accent/10 px-2 py-1 rounded">
+            {t('nav.projects')}
+          </span>
+          <span className="text-xs font-mono text-content-muted whitespace-nowrap">
+            {formatDate(post.date, locale)}
+          </span>
+        </div>
+
+        <h3 className="text-lg font-semibold text-content-strong group-hover:text-accent transition-colors mb-2">
           {stripHtml(post.title.rendered)}
         </h3>
-        <div className="text-xs font-mono text-content-muted mt-2 sm:mt-0 whitespace-nowrap">
-          {formatDate(post.date, locale)}
-        </div>
+
+        <p className="text-content-muted text-sm leading-relaxed flex-1">
+          {stripHtml(post.excerpt.rendered)}
+        </p>
+
+        <a
+          href={post.link}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 mt-4 text-xs font-medium text-accent hover:text-content-strong transition-colors"
+        >
+          {t('blog.readArticle')} <ExternalLink className="w-3.5 h-3.5" />
+        </a>
       </div>
-
-      <p className="text-content-muted text-sm leading-relaxed mb-2">
-        {stripHtml(post.excerpt.rendered)}
-      </p>
-
-      <a
-        href={post.link}
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center gap-1.5 mt-4 text-xs font-medium text-accent hover:text-content-strong transition-colors"
-      >
-        {t('blog.readArticle')} <ExternalLink className="w-3.5 h-3.5" />
-      </a>
     </motion.article>
   );
 }
@@ -116,7 +138,7 @@ export default function Blog() {
       )}
 
       {status === "success" && (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {posts.map((post, i) => (
             <PostCard key={post.id} post={post} index={i} locale={i18n.language} />
           ))}

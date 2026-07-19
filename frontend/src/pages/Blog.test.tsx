@@ -8,7 +8,8 @@ const mocks = vi.hoisted(() => ({
   getLatestPosts: vi.fn(),
 }));
 
-vi.mock('../services/wordpress', () => ({
+vi.mock('../services/wordpress', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../services/wordpress')>()),
   isBlogConfigured: mocks.isBlogConfigured,
   getLatestPosts: mocks.getLatestPosts,
 }));
