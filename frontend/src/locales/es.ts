@@ -55,6 +55,7 @@ const es = {
     title: "Proyectos Destacados",
     subtitle: "Una selección de sistemas y aplicaciones que he construido.",
     viewProject: "Ver Proyecto",
+    relatedPosts: "Artículos sobre este proyecto",
     items: {
       taskManager: {
         description:

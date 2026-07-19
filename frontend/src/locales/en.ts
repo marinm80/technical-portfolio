@@ -60,6 +60,7 @@ const en = {
     title: "Featured Projects",
     subtitle: "A selection of systems and applications I have built.",
     viewProject: "View Project",
+    relatedPosts: "Articles about this project",
     items: {
       taskManager: {
         description:

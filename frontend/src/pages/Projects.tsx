@@ -1,12 +1,39 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { BookOpen, ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { GithubIcon } from "../components/icons/GithubIcon";
 import Seo from "../components/Seo";
 import { projects } from "../data/projects";
+import { getProjectPosts, isBlogConfigured } from "../services/wordpress";
+import type { WordPressPost } from "../types/wordpress";
+
+/** WP devuelve title como HTML; extraemos solo el texto plano. */
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return (doc.body.textContent ?? "").trim();
+}
 
 export default function Projects() {
   const { t } = useTranslation();
+  const [postsByProject, setPostsByProject] = useState<Record<string, WordPressPost[]>>({});
+
+  useEffect(() => {
+    if (!isBlogConfigured()) return;
+
+    let cancelled = false;
+    getProjectPosts(projects.map((project) => project.id))
+      .then((result) => {
+        if (!cancelled) setPostsByProject(result);
+      })
+      .catch(() => {
+        // Sección opcional: si el blog no responde, las tarjetas quedan como antes.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <motion.div
@@ -38,6 +65,29 @@ export default function Projects() {
                 </span>
               ))}
             </div>
+
+            {(postsByProject[project.id]?.length ?? 0) > 0 && (
+              <div className="mb-5 pt-4 border-t border-edge">
+                <h4 className="flex items-center gap-1.5 text-xs font-medium text-content-muted uppercase tracking-wide mb-2">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  {t('projects.relatedPosts')}
+                </h4>
+                <ul className="space-y-1.5">
+                  {postsByProject[project.id].map((post) => (
+                    <li key={post.id}>
+                      <a
+                        href={post.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm text-accent hover:text-content-strong transition-colors"
+                      >
+                        {stripHtml(post.title.rendered)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-3 mt-auto">
               {(project.live ?? project.github) && (
