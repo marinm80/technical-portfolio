@@ -39,26 +39,36 @@ describe('wordpress service', () => {
     await getLatestPosts(3);
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://blog.rafaelmarin.dev/wp-json/wp/v2/posts?per_page=3&_fields=id,slug,link,date,title,excerpt'
+      'https://blog.rafaelmarin.dev/wp-json/wp/v2/categories?slug=proyectos&_fields=id'
     );
   });
 
-  it('fetches and validates posts from the WP REST API', async () => {
+  it('fetches and validates posts from the portfolio category only', async () => {
     vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com/');
-    const fetchMock = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => [validPost],
-    });
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => [{ id: 3 }] })
+      .mockResolvedValueOnce({ ok: true, json: async () => [validPost] });
     vi.stubGlobal('fetch', fetchMock);
 
     const posts = await getLatestPosts(5);
 
     expect(posts).toHaveLength(1);
     expect(posts[0]!.title.rendered).toBe('Hola mundo');
-    // La URL base pierde el slash final y usa per_page + _fields
-    expect(fetchMock).toHaveBeenCalledWith(
-      'https://blog.example.com/wp-json/wp/v2/posts?per_page=5&_fields=id,slug,link,date,title,excerpt'
+    // La URL base pierde el slash final y filtra por la categoría resuelta
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      'https://blog.example.com/wp-json/wp/v2/posts?categories=3&per_page=5&_fields=id,slug,link,date,title,excerpt'
     );
+  });
+
+  it('returns empty when the portfolio category does not exist', async () => {
+    vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com');
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => [] });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(getLatestPosts()).resolves.toEqual([]);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   it('rejects on HTTP errors', async () => {
@@ -71,10 +81,13 @@ describe('wordpress service', () => {
     vi.stubEnv('VITE_WP_API_URL', 'https://blog.example.com');
     vi.stubGlobal(
       'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        json: async () => [{ id: 'not-a-number', unexpected: true }],
-      })
+      vi
+        .fn()
+        .mockResolvedValueOnce({ ok: true, json: async () => [{ id: 3 }] })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => [{ id: 'not-a-number', unexpected: true }],
+        })
     );
     await expect(getLatestPosts()).rejects.toThrow();
   });

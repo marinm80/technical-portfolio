@@ -30,13 +30,27 @@ export function isBlogConfigured(): boolean {
   return Boolean(getBaseUrl());
 }
 
+const wpCategoriesSchema = z.array(z.object({ id: z.number() }));
+
+// El portfolio solo muestra los artículos de proyectos; Tutoriales y
+// Soluciones son contenido propio del blog y no se consumen aquí.
+const PORTFOLIO_CATEGORY_SLUG = "proyectos";
+
 export async function getLatestPosts(limit = 10): Promise<WordPressPost[]> {
   const base = getBaseUrl();
   if (!base) {
     throw new Error("VITE_WP_API_URL is not configured");
   }
 
-  const url = `${base}/wp-json/wp/v2/posts?per_page=${limit}&_fields=id,slug,link,date,title,excerpt`;
+  const categoryUrl = `${base}/wp-json/wp/v2/categories?slug=${PORTFOLIO_CATEGORY_SLUG}&_fields=id`;
+  const categoryResponse = await fetch(categoryUrl);
+  if (!categoryResponse.ok) {
+    throw new Error(`WordPress API responded with ${categoryResponse.status}`);
+  }
+  const categories = wpCategoriesSchema.parse(await categoryResponse.json());
+  if (categories.length === 0) return [];
+
+  const url = `${base}/wp-json/wp/v2/posts?categories=${categories[0]!.id}&per_page=${limit}&_fields=id,slug,link,date,title,excerpt`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`WordPress API responded with ${response.status}`);
