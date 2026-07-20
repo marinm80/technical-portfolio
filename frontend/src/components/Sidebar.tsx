@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { User, Code, FileText, Mail, X, Globe, Sun, Moon } from "lucide-react";
 import { GithubIcon } from "./icons/GithubIcon";
@@ -12,14 +13,47 @@ interface SidebarProps {
   onClose: () => void;
 }
 
+// Coincide con el breakpoint `md:` de Tailwind (768px): a partir de ahí el
+// sidebar siempre está visible y no debe volverse `inert`.
+const DESKTOP_QUERY = "(min-width: 768px)";
+
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { t, i18n } = useTranslation();
   const { theme, toggleTheme } = useTheme();
+  const asideRef = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(DESKTOP_QUERY).matches
+  );
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'es' ? 'en' : 'es';
     i18n.changeLanguage(newLang);
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_QUERY);
+    const handleChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  // En mobile, con el drawer cerrado, sus controles no deben ser alcanzables
+  // por teclado (hoy sólo se ocultaban visualmente con `-translate-x-full`).
+  useEffect(() => {
+    if (asideRef.current) {
+      asideRef.current.inert = !isDesktop && !isOpen;
+    }
+  }, [isDesktop, isOpen]);
+
+  // Escape cierra el drawer móvil, igual que el click en el backdrop.
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   const navItems = [
     { path: "/", label: t('nav.overview'), icon: User },
@@ -39,7 +73,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       {/* Sidebar */}
-      <aside className={cn(
+      <aside ref={asideRef} className={cn(
         "fixed inset-y-0 left-0 w-64 bg-surface-alt border-r border-edge flex flex-col z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
@@ -58,6 +92,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </div>
           <button
             onClick={onClose}
+            aria-label="Close menu"
             className="md:hidden text-content-muted hover:text-content-strong transition-colors -mr-4 -mt-2 p-2"
           >
             <X className="w-5 h-5" />

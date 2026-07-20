@@ -31,7 +31,13 @@ function PostCard({ post, index, locale }: { post: WordPressPost; index: number;
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className="group flex flex-col bg-surface-alt border border-edge rounded-xl overflow-hidden transition-all hover:border-content-muted/40 hover:shadow-lg"
     >
-      <a href={post.link} target="_blank" rel="noreferrer" className="block aspect-video bg-accent/10 overflow-hidden">
+      <a
+        href={post.link}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={image ? undefined : stripHtml(post.title.rendered)}
+        className="block aspect-video bg-accent/10 overflow-hidden"
+      >
         {image ? (
           <img
             src={image.url}
