@@ -51,7 +51,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               className="w-12 h-12 shrink-0 object-contain"
             />
             <div className="min-w-0">
-              <h1 className="text-sm font-bold text-content-strong tracking-tight leading-tight">{profile.name}</h1>
+              {/* No es un <h1>: es la marca persistente del layout, no el encabezado de la página actual (cada página trae su propio <h1>). */}
+              <p className="text-sm font-bold text-content-strong tracking-tight leading-tight">{profile.name}</p>
               <p className="text-xs text-accent mt-0.5 font-mono">{profile.role}</p>
             </div>
           </div>

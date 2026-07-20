@@ -24,4 +24,12 @@ i18n
     },
   });
 
+// `index.html` fija lang="es" como valor inicial estático; esto lo mantiene
+// sincronizado con el idioma real detectado/elegido (WCAG 3.1.1 — el idioma
+// declarado del documento debe coincidir con el idioma del contenido).
+document.documentElement.lang = i18n.language;
+i18n.on("languageChanged", (lng) => {
+  document.documentElement.lang = lng;
+});
+
 export default i18n;

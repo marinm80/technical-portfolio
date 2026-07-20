@@ -56,9 +56,9 @@ function PostCard({ post, index, locale }: { post: WordPressPost; index: number;
           </span>
         </div>
 
-        <h3 className="text-lg font-semibold text-content-strong group-hover:text-accent transition-colors mb-2">
+        <h2 className="text-lg font-semibold text-content-strong group-hover:text-accent transition-colors mb-2">
           {stripHtml(post.title.rendered)}
-        </h3>
+        </h2>
 
         <p className="text-content-muted text-sm leading-relaxed flex-1">
           {stripHtml(post.excerpt.rendered)}

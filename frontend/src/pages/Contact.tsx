@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -21,7 +21,7 @@ function makeContactSchema(t: TFunction) {
 type ContactFormValues = z.infer<ReturnType<typeof makeContactSchema>>;
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isSuccess, setIsSuccess] = useState(false);
   const [sendError, setSendError] = useState(false);
 
@@ -32,10 +32,21 @@ export default function Contact() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset
+    reset,
+    trigger,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
   });
+
+  // El resolver se regenera con el nuevo idioma (arriba), pero react-hook-form
+  // no re-valida por sí solo los campos que ya tenían error — sin esto, el
+  // mensaje queda "congelado" en el idioma en que se disparó originalmente.
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      void trigger();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- solo debe re-disparar por cambio de idioma, no por cada cambio de `errors`/`trigger`.
+  }, [i18n.language]);
 
   const onSubmit = async (data: ContactFormValues) => {
     setSendError(false);

@@ -52,7 +52,7 @@ export default function Projects() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project) => (
           <div key={project.id} className="flex flex-col bg-surface-alt border border-edge p-6 rounded-xl transition-colors hover:border-content-muted/40">
-            <h3 className="font-semibold text-lg text-content-strong mb-4">{project.title}</h3>
+            <h2 className="font-semibold text-lg text-content-strong mb-4">{project.title}</h2>
 
             <p className="text-content-muted text-sm mb-6 flex-1">
               {t(`projects.items.${project.id}.description`)}
@@ -68,10 +68,10 @@ export default function Projects() {
 
             {(postsByProject[project.id]?.length ?? 0) > 0 && (
               <div className="mb-5 pt-4 border-t border-edge">
-                <h4 className="flex items-center gap-1.5 text-xs font-medium text-content-muted uppercase tracking-wide mb-2">
+                <h3 className="flex items-center gap-1.5 text-xs font-medium text-content-muted uppercase tracking-wide mb-2">
                   <BookOpen className="w-3.5 h-3.5" />
                   {t('projects.relatedPosts')}
-                </h4>
+                </h3>
                 <ul className="space-y-1.5">
                   {postsByProject[project.id].map((post) => (
                     <li key={post.id}>
