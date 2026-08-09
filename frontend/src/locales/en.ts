@@ -22,6 +22,7 @@ const en = {
     viewExp: "View Experience",
     viewProjects: "View Projects",
     linkedin: "LinkedIn",
+    github: "GitHub",
     stack: "Main Stack",
     stackCategories: {
       languages: "Languages",

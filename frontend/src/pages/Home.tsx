@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { LinkedinIcon } from "../components/icons/LinkedinIcon";
+import { GithubIcon } from "../components/icons/GithubIcon";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Seo from "../components/Seo";
@@ -44,6 +45,15 @@ export default function Home() {
             <LinkedinIcon className="w-4 h-4" />
             {t('home.linkedin')}
           </a>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-content hover:text-accent transition-colors"
+          >
+            <GithubIcon className="w-4 h-4" />
+            {t('home.github')}
+          </a>
         </div>
       </section>
 
@@ -57,7 +67,7 @@ export default function Home() {
               </h3>
               <div className="flex flex-col gap-2">
                 {techs.map((tech) => (
-                  <span key={tech} className="px-3 py-1.5 bg-surface-alt border border-edge rounded-md text-sm font-mono text-content text-center">
+                  <span key={tech} className="px-3 py-1.5 bg-surface-alt border border-edge rounded-md text-sm font-mono text-content text-center whitespace-nowrap">
                     {tech}
                   </span>
                 ))}
