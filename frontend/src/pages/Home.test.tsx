@@ -41,8 +41,17 @@ describe('Home Page', () => {
 
   it('renders all technology tags from the profile', () => {
     render(<Home />);
-    for (const tech of profile.stack) {
-      expect(screen.getByText(tech)).toBeInTheDocument();
+    for (const techs of Object.values(profile.stack)) {
+      for (const tech of techs) {
+        expect(screen.getByText(tech)).toBeInTheDocument();
+      }
+    }
+  });
+
+  it('renders a category heading for each stack group', () => {
+    render(<Home />);
+    for (const category of ['Lenguajes', 'Frontend', 'Backend', 'Bases de datos', 'DevOps']) {
+      expect(screen.getByText(category)).toBeInTheDocument();
     }
   });
 });

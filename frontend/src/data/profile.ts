@@ -5,5 +5,11 @@ export const profile = {
   email: "rafael.marin@rocanegras.com",
   github: "https://github.com/marinm80",
   linkedin: "https://www.linkedin.com/in/euclides-rafael-marin/",
-  stack: ["TypeScript", "React", "Node.js", "Express", "Tailwind CSS", "PostgreSQL", "Docker"],
+  stack: {
+    languages: ["TypeScript"],
+    frontend: ["React", "Vue 3", "Tailwind CSS"],
+    backend: ["Node.js", "Express", "Laravel"],
+    database: ["PostgreSQL", "MySQL", "Redis"],
+    devops: ["Docker"],
+  },
 } as const;

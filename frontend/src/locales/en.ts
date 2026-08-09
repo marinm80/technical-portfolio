@@ -23,6 +23,13 @@ const en = {
     viewProjects: "View Projects",
     linkedin: "LinkedIn",
     stack: "Main Stack",
+    stackCategories: {
+      languages: "Languages",
+      frontend: "Frontend",
+      backend: "Backend",
+      database: "Databases",
+      devops: "DevOps",
+    },
   },
   experience: {
     title: "Experience",
