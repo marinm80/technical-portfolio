@@ -25,4 +25,11 @@ export const projects: Project[] = [
     github: "https://github.com/marinm80/sg-remesas",
     live: "https://sg-remesas.rafaelmarin.dev/",
   },
+  {
+    id: "salvia",
+    title: "Salvia",
+    tags: ["Laravel", "Vue 3", "PostgreSQL", "Redis", "Docker"],
+    github: "https://github.com/marinm80/telemedicina",
+    live: "https://telemedicina.rafaelmarin.dev",
+  },
 ];

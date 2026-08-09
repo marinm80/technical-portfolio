@@ -74,6 +74,10 @@ const en = {
         description:
           "Full-stack platform to manage remittances, clients, accounts and beneficiaries: role-based dashboards, JWT authentication with RBAC permissions, KYC verification and AML alerts. Built with React, Node.js, Express, PostgreSQL and Docker.",
       },
+      salvia: {
+        description:
+          "Telemedicine platform with database-level non-overlapping appointment booking, chat consultations with electronically signed SOAP clinical notes, cross-specialist referrals and a rules-based scheduling agent (no LLM). Built with Laravel, Vue 3, PostgreSQL with Row-Level Security and Redis.",
+      },
     },
   },
   blog: {

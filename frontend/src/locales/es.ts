@@ -69,6 +69,10 @@ const es = {
         description:
           "Plataforma full-stack para gestionar remesas, clientes, cuentas y beneficiarios: paneles por rol, autenticación JWT con permisos RBAC, verificación KYC y alertas AML. Construida con React, Node.js, Express, PostgreSQL y Docker.",
       },
+      salvia: {
+        description:
+          "Plataforma de telemedicina con reserva de citas sin solapamiento a nivel de base de datos, consultas por chat con notas clínicas SOAP firmadas electrónicamente, sistema de referidos entre especialistas y un agente de agendamiento por reglas (sin LLM). Construido con Laravel, Vue 3, PostgreSQL con Row-Level Security y Redis.",
+      },
     },
   },
   blog: {
