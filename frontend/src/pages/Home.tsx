@@ -49,15 +49,15 @@ export default function Home() {
 
       <section className="space-y-6 pt-8 border-t border-edge">
         <h2 className="text-2xl font-semibold">{t('home.stack')}</h2>
-        <div className="space-y-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
           {Object.entries(profile.stack).map(([category, techs]) => (
             <div key={category} className="space-y-2">
               <h3 className="text-sm font-medium text-content-muted uppercase tracking-wide">
                 {t(`home.stackCategories.${category}`)}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-2">
                 {techs.map((tech) => (
-                  <span key={tech} className="px-3 py-1.5 bg-surface-alt border border-edge rounded-md text-sm font-mono text-content">
+                  <span key={tech} className="px-3 py-1.5 bg-surface-alt border border-edge rounded-md text-sm font-mono text-content text-center">
                     {tech}
                   </span>
                 ))}

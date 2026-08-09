@@ -6,10 +6,10 @@ export const profile = {
   github: "https://github.com/marinm80",
   linkedin: "https://www.linkedin.com/in/euclides-rafael-marin/",
   stack: {
-    languages: ["TypeScript"],
+    languages: ["TypeScript", "JavaScript", "Python"],
     frontend: ["React", "Vue 3", "Tailwind CSS"],
     backend: ["Node.js", "Express", "Laravel"],
     database: ["PostgreSQL", "MySQL", "Redis"],
-    devops: ["Docker"],
+    devops: ["Docker", "Linux"],
   },
 } as const;
