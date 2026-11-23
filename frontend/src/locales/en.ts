@@ -6,7 +6,6 @@ type TranslationSchema = typeof es;
 const en = {
   nav: {
     overview: "Overview",
-    experience: "Experience",
     projects: "Projects",
     blog: "Writing",
     contact: "Contact",
@@ -19,7 +18,6 @@ const en = {
     title: "Full Stack Developer",
     subtitle: "specialized in React & Node.js",
     bio: "I transform complex problems into scalable and efficient systems, with solid Docker and Linux skills to deploy and operate what I build. Focused on code quality and clean architectures.",
-    viewExp: "View Experience",
     viewProjects: "View Projects",
     linkedin: "LinkedIn",
     github: "GitHub",
@@ -30,38 +28,6 @@ const en = {
       backend: "Backend",
       database: "Databases",
       devops: "DevOps",
-    },
-  },
-  experience: {
-    title: "Experience",
-    subtitle: "An overview of my professional journey and technical achievements.",
-    showMore: "Show more",
-    showLess: "Show less",
-    // TODO(rafael): placeholder content — replace with real work experience.
-    items: {
-      techcorp: {
-        role: "Senior Frontend Engineer",
-        company: "Tech Corp",
-        period: "2021 — Present",
-        bullets: [
-          "Led the migration from a monolithic architecture to micro-frontends, reducing build time by 40%.",
-          "Implemented a design system with React and Tailwind CSS, standardizing components across 5 teams.",
-          "Optimized Core Web Vitals reaching a 95+ Lighthouse score through advanced lazy loading and SSR.",
-          "Mentored new engineers during onboarding, reducing ramp-up time by 30%.",
-          "Established strict code review guidelines ensuring long-term maintainability.",
-        ],
-      },
-      startup: {
-        role: "Fullstack Developer",
-        company: "Startup Inc",
-        period: "2018 — 2021",
-        bullets: [
-          "Built RESTful APIs in Node.js and Express handling over 1M daily requests.",
-          "Designed relational database schemas in PostgreSQL for complex billing systems.",
-          "Integrated third-party payment gateways (Stripe, PayPal) ensuring PCI-DSS compliance.",
-          "Deployed scalable infrastructure using AWS ECS and classic load balancers.",
-        ],
-      },
     },
   },
   projects: {
@@ -134,10 +100,6 @@ const en = {
       title: "Euclides Rafael Marin | Full Stack Developer",
       description:
         "Technical portfolio of Euclides Rafael Marin, Full Stack Developer specialized in React and Node.js.",
-    },
-    experience: {
-      title: "Experience | Euclides Rafael Marin",
-      description: "Professional journey and technical achievements of Euclides Rafael Marin.",
     },
     projects: {
       title: "Projects | Euclides Rafael Marin",

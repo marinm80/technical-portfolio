@@ -14,9 +14,6 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          {/* Sección Experiencia oculta hasta tener trayectoria real.
-              Para reactivar: restaurar esta ruta, el item del nav en
-              Sidebar.tsx y el CTA de Home.tsx (key home.viewExp). */}
           <Route path="/projects" element={<Projects />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
