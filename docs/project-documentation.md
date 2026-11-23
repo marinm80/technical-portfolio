@@ -5,6 +5,16 @@
 **Autor:** marinm80  
 **Repositorio:** https://github.com/marinm80/technical-portfolio
 
+> **Estado (2026-11-23): registro histórico de la versión 1.0.** Este documento describe cómo se construyó el sitio en mayo de 2026 y no se mantiene al día. La fuente de verdad es el código en `frontend/src/` y los specs en `specs/`. Divergencias conocidas:
+>
+> | Tema | Este documento | Código actual |
+> |---|---|---|
+> | Sección Experiencia | Ruta `/experience`, ítem en el nav y CTA "Ver Experiencia" activos | Retirada: sin ruta (`frontend/src/App.tsx`), sin ítem en el nav (`frontend/src/components/Sidebar.tsx`); el CTA del Home lleva a `/projects` |
+> | Título del Home | "Ingeniero de Software / especializado en React y Node.js" | Textos traducibles en `frontend/src/locales/*.ts` (`home.title` y `home.subtitle`) |
+> | Stack del Home | Lista fija de tags | Agrupado por categoría (`frontend/src/data/profile.ts`, `stack`) |
+> | Carga de páginas | Imports directos | `lazy()` por página y `ErrorBoundary` (`frontend/src/App.tsx`) |
+> | Despliegue | — | Imagen Docker en Coolify (`specs/static-coolify-deploy/`) |
+
 ---
 
 ## Tabla de Contenidos
@@ -284,7 +294,6 @@ Elementos:
 <Routes>
   <Route element={<MainLayout />}>
     <Route path="/" element={<Home />} />
-    <Route path="/experience" element={<Experience />} />
     <Route path="/projects" element={<Projects />} />
     <Route path="/blog" element={<Blog />} />
     <Route path="/contact" element={<Contact />} />
@@ -328,7 +337,9 @@ Secciones:
 
 Animación: `framer-motion` con `initial={{ opacity: 0, y: 10 }}` → `animate={{ opacity: 1, y: 0 }}`
 
-### 8.2 Experience (`/experience`)
+### 8.2 Experience (`/experience`) — retirada
+
+> Sección retirada del sitio. Se conserva como registro de la v1.0.
 
 **Propósito:** Timeline vertical de experiencia laboral con énfasis en logros técnicos cuantificables.
 

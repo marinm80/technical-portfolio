@@ -1,5 +1,12 @@
 {
   "name": "technical-portfolio",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "lint": "npm --prefix frontend run lint",
+    "test": "npm --prefix frontend test",
+    "typecheck": "npm --prefix frontend exec -- tsc -b frontend"
+  }
 }

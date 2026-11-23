@@ -6,3 +6,8 @@
 # Mockups/fuente del logo (no son assets de la app; los assets reales
 # procesados viven en frontend/public/brand/).
 /logos/
+
+docs/comments/
+
+.claude/
+.impeccable/

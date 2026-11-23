@@ -1,0 +1,103 @@
+{
+ "project": "technical-portfolio",
+ "scanned_at": "2026-11-21T23:01:37",
+ "root": ".",
+ "node": [
+  {
+   "manifest": ".\\package.json",
+   "name": "technical-portfolio",
+   "engines": null,
+   "frameworks": {},
+   "scripts": []
+  },
+  {
+   "manifest": ".\\frontend\\package.json",
+   "name": "frontend",
+   "engines": null,
+   "frameworks": {
+    "react": "^19.2.5",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5",
+    "tailwindcss": "^4.3.0",
+    "eslint": "^10.2.1"
+   },
+   "scripts": [
+    "build",
+    "dev",
+    "lint",
+    "preview",
+    "test",
+    "test:coverage",
+    "test:watch"
+   ]
+  }
+ ],
+ "php": [],
+ "python": [],
+ "wordpress": false,
+ "lockfiles": [
+  "frontend\\package-lock.json"
+ ],
+ "runtime_pins": {},
+ "ci": [
+  ".github/workflows"
+ ],
+ "containers": [
+  "frontend\\Dockerfile"
+ ],
+ "legacy_sdd": [
+  ".claude"
+ ],
+ "specs": [
+  "static-coolify-deploy"
+ ],
+ "sdd_v5": {
+  "docs_reports": false,
+  "docs_comments": false,
+  "gitignore_comments": false
+ },
+ "languages": {
+  "CSS": {
+   "files": 1,
+   "lines": 56
+  },
+  "HTML": {
+   "files": 1,
+   "lines": 45
+  },
+  "JavaScript": {
+   "files": 1,
+   "lines": 29
+  },
+  "TypeScript": {
+   "files": 41,
+   "lines": 2619
+  }
+ },
+ "tests": {
+  "test_files": 14
+ },
+ "comments": {
+  "total_findings": 127,
+  "by_rule": {
+   "CC-01": 122,
+   "CC-E2": 2,
+   "CC-03": 3
+  },
+  "possibly_sensitive": 1
+ },
+ "secret_candidates": {
+  "count": 0,
+  "locations": [],
+  "note": "valores no mostrados; confirmar con gitleaks (repo e historial)"
+ },
+ "git": {
+  "is_repo": true,
+  "branch": "main",
+  "head": "749b964",
+  "commits": "50",
+  "dirty_before_scan": true
+ },
+ "read_only_check": "ok"
+}
