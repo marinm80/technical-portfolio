@@ -1,0 +1,43 @@
+- button "Open Menu"
+- text: Euclides Rafael Marin
+- complementary:
+  - paragraph: Euclides Rafael Marin
+  - paragraph: Full Stack Developer
+  - button "Close menu"
+  - navigation:
+    - link "Overview":
+      - /url: /
+    - link "Projects":
+      - /url: /projects
+    - link "Writing":
+      - /url: /blog
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+  - link "Contact":
+    - /url: /contact
+  - button "Español"
+  - button "Light mode"
+- main:
+  - heading "Writing & Articles" [level=1]
+  - paragraph: Thoughts on software engineering, architecture and the web.
+  - article:
+    - link "Diagrama de capas":
+      - /url: https://wp.characterization.test/arquitectura-por-capas/
+      - img "Diagrama de capas"
+    - text: /Projects October 1, \d+/
+    - heading "Arquitectura por capas en React" [level=2]
+    - paragraph: Separar UI, servicios y datos en una SPA.
+    - link "Read article":
+      - /url: https://wp.characterization.test/arquitectura-por-capas/
+  - article:
+    - link "Despliegue de una SPA en Coolify & Docker":
+      - /url: https://wp.characterization.test/despliegue-en-coolify/
+    - text: /Projects September \d+, \d+/
+    - heading "Despliegue de una SPA en Coolify & Docker" [level=2]
+    - paragraph: Imagen multi-stage con nginx.
+    - link "Read article":
+      - /url: https://wp.characterization.test/despliegue-en-coolify/

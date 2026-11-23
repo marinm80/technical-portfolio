@@ -1,0 +1,11 @@
+{
+  "path": "/contact",
+  "title": "Contacto | Euclides Rafael Marin",
+  "lang": "es",
+  "darkClass": true,
+  "description": "Portafolio técnico de Euclides Rafael Marin. Full Stack Developer especializado en React y Node.js. Construyendo sistemas escalables y arquitecturas limpias.",
+  "canonical": "https://rafaelmarin.dev/contact",
+  "h1": [
+    "Contacto"
+  ]
+}
