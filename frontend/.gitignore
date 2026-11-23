@@ -15,6 +15,7 @@ playwright-report
 blob-report
 coverage
 *.local
+.pnpm-store
 
 # Variables de entorno (usar .env.example como plantilla)
 .env

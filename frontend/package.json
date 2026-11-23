@@ -14,6 +14,7 @@
     "test:e2e": "playwright test --grep-invert @visual",
     "test:visual": "playwright test --grep @visual"
   },
+  "packageManager": "pnpm@12.23.0",
   "dependencies": {
     "@emailjs/browser": "^5.0.3",
     "@hookform/resolvers": "^7.0.6",
