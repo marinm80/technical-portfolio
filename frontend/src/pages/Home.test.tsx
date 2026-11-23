@@ -7,12 +7,12 @@ describe('Home Page', () => {
   it('renders the main title', () => {
     render(<Home />);
     // Default language is 'es', so we expect Spanish text
-    expect(screen.getByText('Full Stack Developer')).toBeInTheDocument();
+    expect(screen.getByText('Euclides Rafael Marin')).toBeInTheDocument();
   });
 
   it('renders the subtitle', () => {
     render(<Home />);
-    expect(screen.getByText('especializado en React y Node.js')).toBeInTheDocument();
+    expect(screen.getByText('Full Stack Developer especializado en React y Node.js')).toBeInTheDocument();
   });
 
   it('renders the bio paragraph', () => {
