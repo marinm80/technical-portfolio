@@ -1,0 +1,47 @@
+- button "Open Menu"
+- text: Euclides Rafael Marin
+- complementary:
+  - paragraph: Euclides Rafael Marin
+  - paragraph: Full Stack Developer
+  - button "Close menu"
+  - navigation:
+    - link "Overview":
+      - /url: /
+    - link "Projects":
+      - /url: /projects
+    - link "Writing":
+      - /url: /blog
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+  - link "Contact":
+    - /url: /contact
+  - button "Español"
+  - button "Light mode"
+- main:
+  - heading "Euclides Rafael Marin Full Stack Developer specialized in React & Node.js" [level=1]
+  - paragraph: I transform complex problems into scalable and efficient systems, with solid Docker and Linux skills to deploy and operate what I build. Focused on code quality and clean architectures.
+  - link "View Projects":
+    - /url: /projects
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+    - text: ""
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+    - text: ""
+  - heading "Main Stack" [level=2]
+  - heading "Languages" [level=3]
+  - text: TypeScript JavaScript Python PHP
+  - heading "Frontend" [level=3]
+  - text: React Vue 3 Tailwind CSS
+  - heading "Backend" [level=3]
+  - text: Node.js Express Laravel
+  - heading "Databases" [level=3]
+  - text: PostgreSQL MySQL Redis
+  - heading "DevOps" [level=3]
+  - text: Docker Linux Nginx Apache GitHub Actions Coolify VPS

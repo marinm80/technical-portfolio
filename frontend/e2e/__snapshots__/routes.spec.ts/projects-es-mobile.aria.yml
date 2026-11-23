@@ -1,0 +1,67 @@
+- button "Open Menu"
+- text: Euclides Rafael Marin
+- complementary:
+  - paragraph: Euclides Rafael Marin
+  - paragraph: Full Stack Developer
+  - button "Close menu"
+  - navigation:
+    - link "Resumen":
+      - /url: /
+    - link "Proyectos":
+      - /url: /projects
+    - link "Artículos":
+      - /url: /blog
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+  - link "Contacto":
+    - /url: /contact
+  - button "English"
+  - button "Modo claro"
+- main:
+  - heading "Proyectos Destacados" [level=1]
+  - paragraph: Una selección de sistemas y aplicaciones que he construido.
+  - heading "Taskly" [level=2]
+  - paragraph: "Taskly: SaaS de gestión de tareas con autenticación JWT, dashboard con filtros y métricas, exportación a CSV y recuperación de contraseña. Construido con React, Node.js, Express, PostgreSQL y Docker."
+  - text: React Node.js Express PostgreSQL Docker
+  - heading "Artículos sobre este proyecto" [level=3]
+  - list:
+    - listitem:
+      - link "Diseño del Task Manager":
+        - /url: https://wp.characterization.test/task-manager-diseno/
+  - link "Ver Proyecto":
+    - /url: https://taskly.rafaelmarin.dev
+  - link "GitHub":
+    - /url: https://github.com/marinm80/task-manager-jwt
+    - img
+    - text: ""
+  - heading "OM Distribution" [level=2]
+  - paragraph: "Plataforma web para una distribuidora de alimentos en EE. UU.: landing page pública y gestión interna de inventario. Construida con React, Node.js, Express, MySQL y Docker."
+  - text: React Node.js Express MySQL Docker
+  - link "Ver Proyecto":
+    - /url: https://omdistribution.rafaelmarin.dev/
+  - link "GitHub":
+    - /url: https://github.com/marinm80/om_distribution
+    - img
+    - text: ""
+  - heading "SG-Remesas" [level=2]
+  - paragraph: "Plataforma full-stack para gestionar remesas, clientes, cuentas y beneficiarios: paneles por rol, autenticación JWT con permisos RBAC, verificación KYC y alertas AML. Construida con React, Node.js, Express, PostgreSQL y Docker."
+  - text: React Node.js Express PostgreSQL Docker
+  - link "Ver Proyecto":
+    - /url: https://sg-remesas.rafaelmarin.dev/
+  - link "GitHub":
+    - /url: https://github.com/marinm80/sg-remesas
+    - img
+    - text: ""
+  - heading "Salvia" [level=2]
+  - paragraph: Plataforma de telemedicina con reserva de citas sin solapamiento a nivel de base de datos, consultas por chat con notas clínicas SOAP firmadas electrónicamente, sistema de referidos entre especialistas y un agente de agendamiento por reglas (sin LLM). Construido con Laravel, Vue 3, PostgreSQL con Row-Level Security y Redis.
+  - text: Laravel Vue 3 PostgreSQL Redis Docker
+  - link "Ver Proyecto":
+    - /url: https://telemedicina.rafaelmarin.dev
+  - link "GitHub":
+    - /url: https://github.com/marinm80/telemedicina
+    - img
+    - text: ""

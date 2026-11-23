@@ -1,0 +1,36 @@
+- button "Open Menu"
+- text: Euclides Rafael Marin
+- complementary:
+  - paragraph: Euclides Rafael Marin
+  - paragraph: Full Stack Developer
+  - button "Close menu"
+  - navigation:
+    - link "Overview":
+      - /url: /
+    - link "Projects":
+      - /url: /projects
+    - link "Writing":
+      - /url: /blog
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+  - link "Contact":
+    - /url: /contact
+  - button "Español"
+  - button "Light mode"
+- main:
+  - heading "Contact" [level=1]
+  - paragraph: Have a project in mind or a job opportunity? Let's talk.
+  - text: Name
+  - textbox "Name":
+    - /placeholder: Your name
+  - text: Email
+  - textbox "Email":
+    - /placeholder: you@email.com
+  - text: Message
+  - textbox "Message":
+    - /placeholder: Describe your proposal here...
+  - button "Send Message"

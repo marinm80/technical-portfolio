@@ -1,0 +1,67 @@
+- button "Open Menu"
+- text: Euclides Rafael Marin
+- complementary:
+  - paragraph: Euclides Rafael Marin
+  - paragraph: Full Stack Developer
+  - button "Close menu"
+  - navigation:
+    - link "Overview":
+      - /url: /
+    - link "Projects":
+      - /url: /projects
+    - link "Writing":
+      - /url: /blog
+  - link "GitHub":
+    - /url: https://github.com/marinm80
+    - img
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/in/euclides-rafael-marin/
+    - img
+  - link "Contact":
+    - /url: /contact
+  - button "Español"
+  - button "Light mode"
+- main:
+  - heading "Featured Projects" [level=1]
+  - paragraph: A selection of systems and applications I have built.
+  - heading "Taskly" [level=2]
+  - paragraph: "Taskly: a task management SaaS with JWT authentication, a dashboard with filters and metrics, CSV export and password recovery. Built with React, Node.js, Express, PostgreSQL and Docker."
+  - text: React Node.js Express PostgreSQL Docker
+  - heading "Articles about this project" [level=3]
+  - list:
+    - listitem:
+      - link "Diseño del Task Manager":
+        - /url: https://wp.characterization.test/task-manager-diseno/
+  - link "View Project":
+    - /url: https://taskly.rafaelmarin.dev
+  - link "GitHub":
+    - /url: https://github.com/marinm80/task-manager-jwt
+    - img
+    - text: ""
+  - heading "OM Distribution" [level=2]
+  - paragraph: "Web platform for a food distribution company in the US: public landing page and internal inventory management. Built with React, Node.js, Express, MySQL and Docker."
+  - text: React Node.js Express MySQL Docker
+  - link "View Project":
+    - /url: https://omdistribution.rafaelmarin.dev/
+  - link "GitHub":
+    - /url: https://github.com/marinm80/om_distribution
+    - img
+    - text: ""
+  - heading "SG-Remesas" [level=2]
+  - paragraph: "Full-stack platform to manage remittances, clients, accounts and beneficiaries: role-based dashboards, JWT authentication with RBAC permissions, KYC verification and AML alerts. Built with React, Node.js, Express, PostgreSQL and Docker."
+  - text: React Node.js Express PostgreSQL Docker
+  - link "View Project":
+    - /url: https://sg-remesas.rafaelmarin.dev/
+  - link "GitHub":
+    - /url: https://github.com/marinm80/sg-remesas
+    - img
+    - text: ""
+  - heading "Salvia" [level=2]
+  - paragraph: Telemedicine platform with database-level non-overlapping appointment booking, chat consultations with electronically signed SOAP clinical notes, cross-specialist referrals and a rules-based scheduling agent (no LLM). Built with Laravel, Vue 3, PostgreSQL with Row-Level Security and Redis.
+  - text: Laravel Vue 3 PostgreSQL Redis Docker
+  - link "View Project":
+    - /url: https://telemedicina.rafaelmarin.dev
+  - link "GitHub":
+    - /url: https://github.com/marinm80/telemedicina
+    - img
+    - text: ""
