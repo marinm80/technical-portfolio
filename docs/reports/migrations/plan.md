@@ -183,3 +183,26 @@ El sitio es estático y se sirve desde un único contenedor en Coolify; no hay t
 1. Confirmar D1–D5.
 2. Aprobar la instalación de herramientas 🟡: gitleaks, Playwright + axe, Prettier, plugins de ESLint, knip, jscpd y (según D3) pnpm.
 3. Decidir si `fix/hero-title` se integra antes de F1 (recomendado: sí, es independiente).
+
+## 8. Avance
+
+| Fase / tarea | Rama | Commit | Estado | Evidencia |
+|---|---|---|---|---|
+| T-000 Título del Home | `fix/hero-title` | `2fb73fa` | Lista para integrar | `tsc -b` 0, `eslint .` 0, 83/83 tests |
+| F1 Seguridad (puntos 3 y 4) | `migr/f1-seguridad` | `a38789e` | Lista para integrar; puntos 1 (gitleaks) pendiente 🟡 | `tsc -b` 0, `eslint .` 0, 83/83 tests; Actions fijadas a v4.4.0 (checkout `11d5960a…`, setup-node `49933ea5…`, obtenidos con `git ls-remote --tags`) |
+| F2 Formato SDD | `migr/f2-formato-sdd` | `e954e36` | Lista para integrar | `git check-ignore` confirma `docs/comments/`, `.claude/`, `.impeccable/`; `npm run lint` y `npm run typecheck` desde la raíz con exit 0 |
+| F7.1 Código muerto "Experiencia" | `migr/f7-codigo-muerto` | `01cfba3` | Lista para integrar | 267 líneas borradas, 0 añadidas; `tsc -b` 0, `eslint .` 0, 74/74 tests (se fueron los 9 de `Experience.test.tsx`); `vite build` 0; `grep` de "Tech Corp", "Startup Inc", "viewExp" y "Ver Experiencia" en `dist/` = 0 archivos |
+| F2b → F9 | — | — | Bloqueadas por instalaciones 🟡 (Playwright, axe, Prettier, plugins de ESLint, knip, jscpd, pnpm) | — |
+
+`git merge-tree` confirma que las cuatro ramas se integran sobre `main` sin conflictos.
+
+Notas:
+- Los tests se corrieron con Node v26.13.1 y `NODE_OPTIONS=--no-experimental-webstorage` (ver §2). CI los corre en Node 22.
+- En `docs/reports/migrations/2026-11-21_inventario.json` y `2026-11-21_diagnostico.md` se cambiaron las rutas absolutas locales por rutas relativas al repo antes de versionarlos (el repo es público). Solo cambió el prefijo de ruta.
+- `docs/project-documentation.html` y `.pdf` siguen siendo copias de la v1.0 sin marcar. No se referencian en el repo; borrarlas o regenerarlas lo decide el humano.
+
+## 9. Tareas abiertas fuera de fases (MI-05)
+
+| ID | Tarea | Severidad | Evidencia | Quién |
+|---|---|---|---|---|
+| T-001 | Actualizar `react-router` y `zod` (vulnerabilidades altas que llegan a producción) y el resto de `npm audit` (23 en total: 9 altas, 12 moderadas, 2 bajas; todas con arreglo sin cambio de versión mayor) | Alta | `npm audit --omit=dev` → `react-router 6.0.0 - 7.18.1` high, `zod <4.6.6` high (GHSA-mrhx-c7xc-m3w5); `npm audit` → 23 vulnerabilidades | Humano 🟡 (`npm audit fix` en `frontend/`), luego el agente verifica |
