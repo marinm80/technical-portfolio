@@ -189,14 +189,16 @@ El sitio es estático y se sirve desde un único contenedor en Coolify; no hay t
 | Fase / tarea | Rama | Commit | Estado | Evidencia |
 |---|---|---|---|---|
 | T-000 Título del Home | `fix/hero-title` | `2fb73fa` | Lista para integrar | `tsc -b` 0, `eslint .` 0, 83/83 tests |
-| F1 Seguridad (puntos 3 y 4) | `migr/f1-seguridad` | `a38789e` | Lista para integrar; puntos 1 (gitleaks) pendiente 🟡 | `tsc -b` 0, `eslint .` 0, 83/83 tests; Actions fijadas a v4.4.0 (checkout `11d5960a…`, setup-node `49933ea5…`, obtenidos con `git ls-remote --tags`) |
+| F1 Seguridad | `migr/f1-seguridad` | `a38789e` | Lista para integrar. Punto 1 cerrado: gitleaks 8.30.1 (winget `Gitleaks.Gitleaks`) sin hallazgos en el árbol, en `main` y en las 55 confirmaciones de todas las ramas | `tsc -b` 0, `eslint .` 0, 83/83 tests; Actions fijadas a v4.4.0 (checkout `11d5960a…`, setup-node `49933ea5…`, obtenidos con `git ls-remote --tags`) |
 | F2 Formato SDD | `migr/f2-formato-sdd` | `e954e36` | Lista para integrar | `git check-ignore` confirma `docs/comments/`, `.claude/`, `.impeccable/`; `npm run lint` y `npm run typecheck` desde la raíz con exit 0 |
 | F7.1 Código muerto "Experiencia" | `migr/f7-codigo-muerto` | `01cfba3` | Lista para integrar | 267 líneas borradas, 0 añadidas; `tsc -b` 0, `eslint .` 0, 74/74 tests (se fueron los 9 de `Experience.test.tsx`); `vite build` 0; `grep` de "Tech Corp", "Startup Inc", "viewExp" y "Ver Experiencia" en `dist/` = 0 archivos |
-| F2b → F9 | — | — | Bloqueadas por instalaciones 🟡 (Playwright, axe, Prettier, plugins de ESLint, knip, jscpd, pnpm) | — |
+| F2b Línea base de caracterización | `migr/f2b-caracterizacion` (sobre `fix/hero-title`) | `405d281`, `7a62ab3` | Lista para integrar. Cobertura base pendiente (T-003) | 56 tests Playwright (2 proyectos: desktop y móvil): 40 golden masters (hechos de la página, árbol accesible, axe WCAG 2.1 A/AA, capturas `@visual` solo locales) y 16 de interacción. 3 corridas seguidas iguales: 55 pasan y 1 se salta (el drawer móvil no existe en desktop). Prueba de fuerza: 7 de 7 mutaciones detectadas (una por ruta, más contacto y tema). axe: 0 violaciones en todas las páginas |
+| F3 → F9 | — | — | F3 puede empezar. F4–F9 necesitan instalaciones 🟡 (Prettier, plugins de ESLint, knip, jscpd, pnpm) | — |
 
-`git merge-tree` confirma que las cuatro ramas se integran sobre `main` sin conflictos.
+`git merge-tree` confirma que las cinco ramas se integran sobre `main` sin conflictos. Sobre el árbol integrado (worktree temporal fuera del repo): `npm ci`, 74/74 tests unitarios y 3 corridas de Playwright con 55 que pasan y 1 que se salta (MI-03).
 
 Notas:
+- El `node_modules` local estaba desalineado con el lockfile (versiones más nuevas instaladas sin guardar). Desde F2b todas las verificaciones corren sobre `npm ci`, y F1 y F7 se volvieron a verificar así: F1 83/83, F7 74/74, `tsc -b` y `eslint .` con exit 0.
 - Los tests se corrieron con Node v26.13.1 y `NODE_OPTIONS=--no-experimental-webstorage` (ver §2). CI los corre en Node 22.
 - En `docs/reports/migrations/2026-11-21_inventario.json` y `2026-11-21_diagnostico.md` se cambiaron las rutas absolutas locales por rutas relativas al repo antes de versionarlos (el repo es público). Solo cambió el prefijo de ruta.
 - `docs/project-documentation.html` y `.pdf` siguen siendo copias de la v1.0 sin marcar. No se referencian en el repo; borrarlas o regenerarlas lo decide el humano.
@@ -206,3 +208,6 @@ Notas:
 | ID | Tarea | Severidad | Evidencia | Quién |
 |---|---|---|---|---|
 | T-001 | Actualizar `react-router` y `zod` (vulnerabilidades altas que llegan a producción) y el resto de `npm audit` (23 en total: 9 altas, 12 moderadas, 2 bajas; todas con arreglo sin cambio de versión mayor) | Alta | `npm audit --omit=dev` → `react-router 6.0.0 - 7.18.1` high, `zod <4.6.6` high (GHSA-mrhx-c7xc-m3w5); `npm audit` → 23 vulnerabilidades | Humano 🟡 (`npm audit fix` en `frontend/`), luego el agente verifica |
+| T-002 | `index.html` deja su `<meta name="description">` y su `<title>` estáticos, y React 19 añade los suyos por página. La `description` que queda primera es siempre la española del Home, en cualquier página e idioma. Lo mismo pasa con `og:title` | Media (SEO) | Golden master `*-facts.json` (campo `description`); sondeo en `/blog` en inglés: dos `meta[name=description]` y dos `<title>` | Agente, en tarea aparte; cambia la salida del head, así que hay que regenerar los golden masters con aprobación |
+| T-003 | `npm run test:coverage` falla: `MISSING DEPENDENCY Cannot find dependency @vitest/coverage-v8`. Sin él no hay cobertura base (PT-02) | Baja | Salida del comando | Humano 🟡 (instalar `@vitest/coverage-v8` con la misma versión que `vitest`) |
+| T-004 | La batería de caracterización todavía no corrió en CI (Linux). Los snapshots de texto no dependen de la plataforma, pero falta confirmarlo con la primera corrida | Baja | `ci.yml`, paso "Run characterization suite" | Se cierra con el primer push |
