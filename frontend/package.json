@@ -15,7 +15,7 @@
     "test:visual": "playwright test --grep @visual"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
+    "@emailjs/browser": "^5.0.3",
     "@hookform/resolvers": "^5.9.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.43.0",
