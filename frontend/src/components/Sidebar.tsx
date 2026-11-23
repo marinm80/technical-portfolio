@@ -57,7 +57,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const navItems = [
     { path: "/", label: t('nav.overview'), icon: User },
-    // Experiencia oculta hasta tener trayectoria real (ver App.tsx)
     { path: "/projects", label: t('nav.projects'), icon: Code },
     { path: "/blog", label: t('nav.blog'), icon: FileText },
   ];

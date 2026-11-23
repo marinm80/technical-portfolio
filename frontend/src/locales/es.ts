@@ -1,7 +1,6 @@
 const es = {
   nav: {
     overview: "Resumen",
-    experience: "Experiencia",
     projects: "Proyectos",
     blog: "Artículos",
     contact: "Contacto",
@@ -14,7 +13,6 @@ const es = {
     title: "Euclides Rafael Marin",
     subtitle: "Full Stack Developer especializado en React y Node.js",
     bio: "Transformo problemas complejos en sistemas escalables y eficientes, con conocimientos sólidos de Docker y Linux para desplegar y operar lo que construyo. Enfocado en la calidad del código y en arquitecturas limpias.",
-    viewExp: "Ver Experiencia",
     viewProjects: "Ver Proyectos",
     linkedin: "LinkedIn",
     github: "GitHub",
@@ -25,38 +23,6 @@ const es = {
       backend: "Backend",
       database: "Bases de datos",
       devops: "DevOps",
-    },
-  },
-  experience: {
-    title: "Experiencia",
-    subtitle: "Un resumen de mi trayectoria profesional y logros técnicos.",
-    showMore: "Ver más",
-    showLess: "Ver menos",
-    // TODO(rafael): contenido placeholder — reemplazar con experiencia laboral real.
-    items: {
-      techcorp: {
-        role: "Senior Frontend Engineer",
-        company: "Tech Corp",
-        period: "2021 — Presente",
-        bullets: [
-          "Lideré la migración de una arquitectura monolítica a micro-frontends reduciendo el tiempo de build en un 40%.",
-          "Implementé un sistema de diseño utilizando React y Tailwind CSS, estandarizando componentes para 5 equipos.",
-          "Optimicé el Core Web Vitals alcanzando un score de 95+ en Lighthouse a través de lazy loading avanzado y SSR.",
-          "Mentoricé a nuevos ingenieros durante su proceso de onboarding, reduciendo el tiempo de rampa en un 30%.",
-          "Establecí pautas estrictas de revisión de código garantizando la mantenibilidad a largo plazo.",
-        ],
-      },
-      startup: {
-        role: "Fullstack Developer",
-        company: "Startup Inc",
-        period: "2018 — 2021",
-        bullets: [
-          "Desarrollé APIs RESTful en Node.js y Express gestionando más de 1M de peticiones diarias.",
-          "Diseñé esquemas de bases de datos relacionales en PostgreSQL para sistemas de facturación complejos.",
-          "Integré pasarelas de pago de terceros (Stripe, PayPal) asegurando la compatibilidad PCI-DSS.",
-          "Desplegué infraestructura escalable usando AWS ECS y balanceadores de carga clásicos.",
-        ],
-      },
     },
   },
   projects: {
@@ -129,10 +95,6 @@ const es = {
       title: "Euclides Rafael Marin | Full Stack Developer",
       description:
         "Portafolio técnico de Euclides Rafael Marin, Full Stack Developer especializado en React y Node.js.",
-    },
-    experience: {
-      title: "Experiencia | Euclides Rafael Marin",
-      description: "Trayectoria profesional y logros técnicos de Euclides Rafael Marin.",
     },
     projects: {
       title: "Proyectos | Euclides Rafael Marin",

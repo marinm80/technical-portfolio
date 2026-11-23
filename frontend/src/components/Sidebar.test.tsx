@@ -25,7 +25,6 @@ describe('Sidebar Component', () => {
     expect(screen.getByText('Resumen')).toBeInTheDocument();
     expect(screen.getByText('Proyectos')).toBeInTheDocument();
     expect(screen.getByText('Artículos')).toBeInTheDocument();
-    // Experiencia oculta hasta tener trayectoria real
     expect(screen.queryByText('Experiencia')).not.toBeInTheDocument();
   });
 
