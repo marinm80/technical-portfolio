@@ -11,8 +11,8 @@ const es = {
     themeDark: "Modo oscuro",
   },
   home: {
-    title: "Full Stack Developer",
-    subtitle: "especializado en React y Node.js",
+    title: "Euclides Rafael Marin",
+    subtitle: "Full Stack Developer especializado en React y Node.js",
     bio: "Transformo problemas complejos en sistemas escalables y eficientes, con conocimientos sólidos de Docker y Linux para desplegar y operar lo que construyo. Enfocado en la calidad del código y en arquitecturas limpias.",
     viewExp: "Ver Experiencia",
     viewProjects: "Ver Proyectos",
